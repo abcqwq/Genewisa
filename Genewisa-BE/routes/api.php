@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TempatWisataController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::get('/review', [ReviewController::class, 'index']);
 Route::get('/review/{id}', [ReviewController::class, 'view']);
 Route::put('/review/{id}', [ReviewController::class, 'update']);
 Route::delete('/review/{id}', [ReviewController::class, 'delete']);
+
+// Login
+Route::post('/login', [LoginController::class, 'login']);
