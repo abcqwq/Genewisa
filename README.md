@@ -2,16 +2,16 @@
 
 Aplikasi rekomender tempat wisata Pulau Jawa.
 
-# Anggota Kelompok
+### Anggota Kelompok
 1. Butrahandisya
 2. Ikhlasul Arifin
 3. Joshua Erlangga Sakti
 4. Kevin Usmayadhy Wijaya
 
-# Backend Techstack:
+### Backend Techstack:
 - Laravel
 
-# Frontend Techstack:
+### Frontend Techstack:
 - Vue.js
 - Pinia
 - TailwindCSS
