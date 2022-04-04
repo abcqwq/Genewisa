@@ -14,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return (new ResponseController)->toResponse($user, 200);
+        $users = User::all();
+        return (new ResponseController)->toResponse($users, 200);
     }
 
 

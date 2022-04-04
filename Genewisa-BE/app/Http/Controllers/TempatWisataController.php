@@ -17,9 +17,9 @@ class TempatWisataController extends Controller
      */
 
     public function index() {
-        $tempatWisata = TempatWisata::all();
+        $tempatWisatas = TempatWisata::all();
         
-        return (new ResponseController)->toResponse($tempatWisata, 200);
+        return (new ResponseController)->toResponse($tempatWisatas, 200);
     }
 
 

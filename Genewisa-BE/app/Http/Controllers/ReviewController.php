@@ -17,8 +17,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $review = Review::all();
-        return (new ResponseController)->toResponse($review, 200);
+        $reviews = Review::all();
+        return (new ResponseController)->toResponse($reviews, 200);
     }
 
     /**
@@ -65,29 +65,37 @@ class ReviewController extends Controller
             'username' => 'required',
             'id_tempatwisata' => 'required',
             'rating' => 'required|numeric|min:1|max:5',
-            'comment' => 'required'
         ];
+
+        $errormsg = [];
         // Validate field
         $validation = Validator::make($values, $rules);
         if ($validation->fails()) {
-            if ($request->rating > 5 || $request->rating < 1) {
-                return (new ResponseController)->toResponse(null, 400, ["nilai rating tidak valid!"]); 
+            if (isset($request->rating) && ($request->rating > 5 || $request->rating < 1)) {
+                array_push($errormsg, "nilai rating tidak valid!"); 
             }
-            return (new ResponseController)->toResponse(null, 400, ["ada field kosong!"]); 
+            if (!isset($request->username) || !isset($request->id_tempatwisata) || !isset($request->rating)) {
+                array_push($errormsg, "ada field kosong!");
+            }
         }
         // Validate value
         $user = User::find($request->username);
-        if(!isset($user)) {
-            return (new ResponseController)->toResponse(null, 400, ["username tidak valid!"]); 
+        if(!isset($user) && isset($request->username)) {
+            array_push($errormsg, "username tidak valid!");
         }
         $tempatWisata = TempatWisata::find($request->id_tempatwisata);
-        if(!isset($tempatWisata)) {
-            return (new ResponseController)->toResponse(null, 400, ["id tempat wisata tidak valid!"]); 
+        if(!isset($tempatWisata) && isset($request->id_tempatwisata)) {
+            array_push($errormsg, "id tempat wisata tidak valid!"); 
         }
+
         // Validate duplicate
         $review = Review::where('username', $request->username)->where('id_tempatwisata', $request->id_tempatwisata)->first();
         if (isset($review)) {
-            return (new ResponseController)->toResponse(null, 400, ['data duplikat!']);
+            array_push($errormsg, "data duplikat!");
+        }
+
+        if (count($errormsg) > 0) {
+            return (new ResponseController)->toResponse(null, 400, $errormsg);
         }
 
         return (new ResponseController)->toResponse(Review::create($values), 200);
@@ -130,17 +138,21 @@ class ReviewController extends Controller
         );
         $rules = [
             'rating' => 'required|numeric|min:1|max:5',
-            'comment' => 'required'
         ];
+        $errormsg = [];
         // Validate field
         $validation = Validator::make($values, $rules);
         if ($validation->fails()) {
-            if ($request->rating > 5 || $request->rating < 1) {
-                return (new ResponseController)->toResponse(null, 400, ["nilai rating tidak valid!"]); 
+            if (isset($request->rating) && ($request->rating > 5 || $request->rating < 1)) {
+                array_push($errormsg, "nilai rating tidak valid!"); 
             }
-            return (new ResponseController)->toResponse(null, 400, ["ada field kosong!"]); 
+            if (!isset($request->rating)) {
+                array_push($errormsg, "ada field kosong!");
+            }
         }
-
+        if (count($errormsg) > 0) {
+            return (new ResponseController)->toResponse(null, 400, $errormsg);
+        }
         $review = Review::find($id);
         if (!isset($review)) {
             return (new ResponseController)->toResponse($review, 404);

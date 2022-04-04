@@ -25,7 +25,7 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->integer('rating');
-            $table->text('comment')->nullable(false);
+            $table->text('comment')->nullable(true);
         });
     }
 
