@@ -66,7 +66,7 @@ class UserController extends Controller
             'first_name' => 'required'
         ];
         $errormsg = [
-            'required' => 'The :attribute field is required'
+            'required' => 'username/password/firstname harus diisi'
         ];
         $validation = Validator::make($values, $rules, $errormsg);
         $user = User::find($request->username);
