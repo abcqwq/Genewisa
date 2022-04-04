@@ -1,7 +1,9 @@
+
 <?php
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TempatWisataController;
 
 /*
@@ -14,6 +16,14 @@ use App\Http\Controllers\TempatWisataController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+// User
+Route::post('/user', [UserController::class, 'store']);
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/{username}', [UserController::class, 'view']);
+Route::put('/user/{username}', [UserController::class, 'update']);
+Route::delete('/user/{username}', [UserController::class, 'delete']);
 
 // Tempat Wisata
 Route::post('/tempat-wisata', [TempatWisataController::class, 'store']);

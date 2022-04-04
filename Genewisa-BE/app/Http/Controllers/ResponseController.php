@@ -30,4 +30,4 @@ class ResponseController extends Controller
             'error' => $error
         ], $code);
     }
-}
+
