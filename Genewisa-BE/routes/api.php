@@ -30,3 +30,10 @@ Route::get('/tempat-wisata', [TempatWisataController::class, 'index']);
 Route::get('/tempat-wisata/{id}', [TempatWisataController::class, 'view']);
 Route::put('/tempat-wisata/{id}', [TempatWisataController::class, 'update']);
 Route::delete('/tempat-wisata/{id}', [TempatWisataController::class, 'delete']);
+
+// Review
+Route::post('/review', [ReviewController::class, 'store']);
+Route::get('/review', [ReviewController::class, 'index']);
+Route::get('/review/{id}', [ReviewController::class, 'view']);
+Route::put('/review/{id}', [ReviewController::class, 'update']);
+Route::delete('/review/{id}', [ReviewController::class, 'delete']);
