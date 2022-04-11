@@ -17,6 +17,7 @@ use App\Http\Controllers\TempatWisataController;
 |
 */
 
+
 // User
 Route::post('/user', [UserController::class, 'store']);
 Route::get('/user', [UserController::class, 'index']);
