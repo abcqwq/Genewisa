@@ -3,6 +3,8 @@ import NavigationBar from "../components/LandingPage/NavigationBar.vue";
 import BodyContent from "../components/LoginPage/Body.vue";
 import LandingSVG from "../components/LandingPage/LandingSVG.vue";
 import {onMounted, ref} from 'vue'
+import {useGeneralStore} from "../stores/General";
+import router from "../router";
 
 // reactive state
 let count = ref(0)
@@ -11,6 +13,14 @@ let count = ref(0)
 function increment() {
     count.value++
 }
+
+onMounted(() => {
+    let store = useGeneralStore();
+    console.log(store.token);
+    if (store.token !== '') {
+        router.push('/dashboard');
+    }
+})
 
 </script>
 

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class AdminToken extends Model
 {
     use HasFactory;
     
     public $timestamps = false;
     
-    protected $table = "user";
+    protected $table = "admin_token";
 
-    protected $primaryKey = 'username';
+    protected $primaryKey = 'token';
     public $incrementing = false;
     
-    protected $fillable = ['username', 'password', 'first_name', 'last_name'];
+    protected $fillable = ['token'];
 }

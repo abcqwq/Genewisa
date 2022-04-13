@@ -2,15 +2,16 @@
 import NavigationBar from "../components/LandingPage/NavigationBar.vue";
 import BodyContent from "../components/LandingPage/Body.vue";
 import LandingSVG from "../components/LandingPage/LandingSVG.vue";
+import { useGeneralStore } from "../stores/General";
 import {onMounted, ref} from 'vue'
+import router from "../router";
 
-// reactive state
-let count = ref(0)
-
-// functions that mutate state and trigger updates
-function increment() {
-    count.value++
-}
+onMounted(() => {
+    const store = useGeneralStore();
+    if (store.token !== '') {
+        router.push('/dashboard');
+    }
+})
 
 </script>
 
