@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TempatWisataController;
+use App\Http\Controllers\AdminTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,8 @@ Route::get('/review', [ReviewController::class, 'index']);
 Route::get('/review/{id}', [ReviewController::class, 'view']);
 Route::put('/review/{id}', [ReviewController::class, 'update']);
 Route::delete('/review/{id}', [ReviewController::class, 'delete']);
+
+// Admin
+Route::post('/admin', [AdminTokenController::class, 'store']);
+Route::get('/admin', [AdminTokenController::class, 'index']);
+Route::delete('/admin', [AdminTokenController::class, 'delete']);
