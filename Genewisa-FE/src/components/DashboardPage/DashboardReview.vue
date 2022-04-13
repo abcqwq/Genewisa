@@ -8,7 +8,7 @@ const listData = ref([]);
 function getData() {
     axios({
         method: "get",
-        url: "http://localhost:8000/api/user",
+        url: "http://localhost:8000/api/review",
         params: {
             token: store.token
         }
@@ -28,14 +28,16 @@ onMounted(() => {
     <table class="table-fixed w-full">
         <thead>
         <tr>
-            <th class="text-left w-1/3">Username</th>
-            <th class="text-left w-1/3">Nama Depan</th>
-            <th class="text-left w-1/3">Nama Belakang</th>
+            <th class="text-left w-1/4">Username</th>
+            <th class="text-left w-1/4">Tempat Wisata</th>
+            <th class="text-left w-1/4">Rating</th>
+            <th class="text-left w-1/4">Comment</th>
         </tr>
         <tr class="h-12" v-for="(data, index) in listData" :data="data" v-bind:class="{'bg-slate-50' : !(index % 2)}">
             <td> {{ data.username }} </td>
-            <td> {{ data.first_name }} </td>
-            <td> {{ data.last_name }} </td>
+            <td> {{ data.id_tempatwisata }} </td>
+            <td> {{ data.rating }} </td>
+            <td> {{ data.comment }}</td>
         </tr>
         {{listData.value}}
         </thead>

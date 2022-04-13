@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Controllers\ResponseController;
+use App\Models\AdminToken;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,11 +18,12 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        error_log($request->header('token'));
-        if ($request->session()->has('token') && $request->header('token') == $request->session()->get('token')) {
-            return $next($request);
+        $tokenFromDB = AdminToken::find($request->token);
+
+        if (!isset($tokenFromDB)) {
+            return (new ResponseController)->toResponse(null, 400, ['Unauthenticated']);
         }
 
-        return (new ResponseController)->toResponse(null, 400, ['Unauthenticated']);
+        return $next($request);
     }
 }

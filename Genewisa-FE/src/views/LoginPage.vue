@@ -6,14 +6,6 @@ import {onMounted, ref} from 'vue'
 import {useGeneralStore} from "../stores/General";
 import router from "../router";
 
-// reactive state
-let count = ref(0)
-
-// functions that mutate state and trigger updates
-function increment() {
-    count.value++
-}
-
 onMounted(() => {
     let store = useGeneralStore();
     console.log(store.token);
