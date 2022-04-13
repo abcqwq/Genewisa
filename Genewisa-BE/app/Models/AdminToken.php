@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TempatWisata extends Model
+class AdminToken extends Model
 {
     use HasFactory;
-
+    
     public $timestamps = false;
     
-    protected $table = "tempatwisata";
+    protected $table = "admin_token";
 
-    protected $fillable = ['name', 'city', 'description'];
+    protected $primaryKey = 'token';
+    public $incrementing = false;
+    
+    protected $fillable = ['token'];
 }

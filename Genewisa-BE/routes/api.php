@@ -1,10 +1,12 @@
 
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TempatWisataController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,22 +21,31 @@ use App\Http\Controllers\TempatWisataController;
 
 
 // User
-Route::post('/user', [UserController::class, 'store']);
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/{username}', [UserController::class, 'view']);
-Route::put('/user/{username}', [UserController::class, 'update']);
-Route::delete('/user/{username}', [UserController::class, 'delete']);
+Route::post('/user', [UserController::class, 'store'])->middleware('auth');
+Route::get('/user', [UserController::class, 'index'])->middleware('auth');
+Route::get('/user/{username}', [UserController::class, 'view'])->middleware('auth');
+Route::put('/user/{username}', [UserController::class, 'update'])->middleware('auth');
+Route::delete('/user/{username}', [UserController::class, 'delete'])->middleware('auth');
 
 // Tempat Wisata
-Route::post('/tempat-wisata', [TempatWisataController::class, 'store']);
-Route::get('/tempat-wisata', [TempatWisataController::class, 'index']);
-Route::get('/tempat-wisata/{id}', [TempatWisataController::class, 'view']);
-Route::put('/tempat-wisata/{id}', [TempatWisataController::class, 'update']);
-Route::delete('/tempat-wisata/{id}', [TempatWisataController::class, 'delete']);
+Route::post('/tempat-wisata', [TempatWisataController::class, 'store'])->middleware('auth');
+Route::get('/tempat-wisata', [TempatWisataController::class, 'index'])->middleware('auth');
+Route::get('/tempat-wisata/{id}', [TempatWisataController::class, 'view'])->middleware('auth');
+Route::put('/tempat-wisata/{id}', [TempatWisataController::class, 'update'])->middleware('auth');
+Route::delete('/tempat-wisata/{id}', [TempatWisataController::class, 'delete'])->middleware('auth');
 
 // Review
-Route::post('/review', [ReviewController::class, 'store']);
-Route::get('/review', [ReviewController::class, 'index']);
-Route::get('/review/{id}', [ReviewController::class, 'view']);
-Route::put('/review/{id}', [ReviewController::class, 'update']);
-Route::delete('/review/{id}', [ReviewController::class, 'delete']);
+Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
+Route::get('/review', [ReviewController::class, 'index'])->middleware('auth');
+Route::get('/review/{id}', [ReviewController::class, 'view'])->middleware('auth');
+Route::put('/review/{id}', [ReviewController::class, 'update'])->middleware('auth');
+Route::delete('/review/{id}', [ReviewController::class, 'delete'])->middleware('auth');
+
+// Login
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+// Admin
+Route::post('/admin', [AdminTokenController::class, 'store']);
+Route::get('/admin', [AdminTokenController::class, 'findToken']);
+Route::delete('/admin', [AdminTokenController::class, 'delete']);
