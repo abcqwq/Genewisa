@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return (new ResponseController)->toResponse($user, 200);
+        $users = User::all();
+        return (new ResponseController)->toResponse($users, 200);
     }
 
 
@@ -57,7 +58,7 @@ class UserController extends Controller
     {
         $values = array(
             'username' => $request->username,
-            'password' => hash('sha256', $request->password),
+            'password' => Hash::make($request->password),
             'first_name' => $request->first_name,
             'last_name' => $request->last_name
         );

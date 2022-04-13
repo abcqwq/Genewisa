@@ -11,9 +11,7 @@ class LoginController extends Controller
     {
 
         if ($request->username == 'admin' && $request->username == $request->password) {
-            $token = Str::random(64);
-            $request->session()->put('token', $token);
-            return (new ResponseController)->toResponse(['token' => $token], 200);
+            return (new AdminTokenController)->store();
         }
 
         return (new ResponseController)->toResponse(null, 400, ['Username atau password salah...']);

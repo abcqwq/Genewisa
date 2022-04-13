@@ -3,8 +3,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TempatWisataController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +44,8 @@ Route::delete('/review/{id}', [ReviewController::class, 'delete'])->middleware('
 // Login
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+// Admin
+Route::post('/admin', [AdminTokenController::class, 'store']);
+Route::get('/admin', [AdminTokenController::class, 'findToken']);
+Route::delete('/admin', [AdminTokenController::class, 'delete']);
