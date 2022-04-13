@@ -8,18 +8,18 @@ use Illuminate\Support\Str;
 
 class AdminTokenController extends Controller
 {
-    public function findToken($token) {
-        $tokenFromDB = AdminToken::find($token);
+    public function findToken(Request $request) {
+        $tokenFromDB = AdminToken::find($request->token);
 
         if (isset($tokenFromDB)) {
             return (new ResponseController)->toResponse($tokenFromDB, 200);
         }
 
-        return (new ResponseController)->toResponse($tokenFromDB, 404, ["Token " . $token . " tidak dapat ditemukan..."]);
+        return (new ResponseController)->toResponse($tokenFromDB, 404, ["Unauthorized"]);
     }
-    public function delete($token)
+    public function delete(Request $request)
     {
-        $tokenFromDB = AdminToken::find($token);
+        $tokenFromDB = AdminToken::find($request->token);
 
         if (isset($tokenFromDB)) {
             return (new ResponseController)->toResponse($tokenFromDB->delete(), 200);
@@ -31,6 +31,6 @@ class AdminTokenController extends Controller
     public function store()
     { 
         $token = Str::random(64);
-        return (new ResponseController)->toResponse(AdminToken::create($token), 200);
+        return (new ResponseController)->toResponse(AdminToken::create(['token' => $token]), 200);
     }
 }

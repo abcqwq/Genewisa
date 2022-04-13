@@ -43,5 +43,5 @@ Route::delete('/review/{id}', [ReviewController::class, 'delete']);
 
 // Admin
 Route::post('/admin', [AdminTokenController::class, 'store']);
-Route::get('/admin', [AdminTokenController::class, 'index']);
+Route::get('/admin', [AdminTokenController::class, 'findToken']);
 Route::delete('/admin', [AdminTokenController::class, 'delete']);
