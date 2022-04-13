@@ -31,3 +31,4 @@ class ResponseController extends Controller
         ], $code);
     }
 
+}
