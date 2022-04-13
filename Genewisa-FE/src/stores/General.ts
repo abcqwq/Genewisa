@@ -4,6 +4,7 @@ import {ref} from "vue";
 export const useGeneralStore = defineStore("general", () => {
     const token = ref('');
     const dashboardSection = ref('akun');
+    const isEditing = ref(false);
 
     const forgetToken = () => {
         token.value = '';
@@ -18,7 +19,7 @@ export const useGeneralStore = defineStore("general", () => {
     }
 
     return {
-        token, dashboardSection, forgetToken, setToken, setDashboardSection
+        token, dashboardSection, forgetToken, setToken, setDashboardSection, isEditing
     }
 
 }, {

@@ -82,7 +82,7 @@ function handleLogout() {
                 <div class="flex w-full">
 
                     <div class="text-4xl font-semibold basis-1/2">
-                        Data {{ $title }}
+                        Data {{ store.dashboardSection }}
                     </div>
 
                     <div class="basis-1/2 flex justify-end">
