@@ -5,8 +5,7 @@ import router from "../router";
 import axios from "axios";
 
 onMounted(() => {
-    let store = useGeneralStore();
-    console.log(store.token);
+    const store = useGeneralStore();
     if (store.token == '') {
         router.push('/login');
     }
@@ -20,10 +19,9 @@ function handleLogout() {
         method: "post",
         url: "http://localhost:8000/api/logout",
         params: {
-
+            token: store.token
         }})
-        .then((res) => {
-            console.log(res);
+        .then(() => {
             store.forgetToken();
             router.push("/");
         })
@@ -49,6 +47,8 @@ function handleLogout() {
             </div>
 
         </div>
+
+
 
 
     </div>

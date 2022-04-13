@@ -7,8 +7,7 @@ import {onMounted, ref} from 'vue'
 import router from "../router";
 
 onMounted(() => {
-    let store = useGeneralStore();
-    console.log(store.token);
+    const store = useGeneralStore();
     if (store.token !== '') {
         router.push('/dashboard');
     }

@@ -19,10 +19,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        if ($request->session()->has('token')) {
-            $request->session()->forget('token');
-            return (new ResponseController)->toResponse('Log-out successful', 200);
-        }
-        return (new ResponseController)->toResponse(null, 400, ['Silahkan log-in terlebih dahulu...']);
+        return (new AdminTokenController)->delete($request);
     }
 }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import UsernameSVG from "./UsernameSVG.vue";
 import PasswordSVG from "./PasswordSVG.vue";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import axios from "axios";
 import {useGeneralStore} from "../../stores/General";
 import router from "../../router";
@@ -19,7 +19,7 @@ function handleLogin() {
             password: password.value
         }})
         .then((res) => {
-            store.rememberToken(res.data.data.token);
+            store.setToken(res.data.data.token);
             router.push("/dashboard");
         })
         .catch((err) => console.log(err));
@@ -58,13 +58,6 @@ function handleLogin() {
             <button @click="handleLogin" class="mt-6 text-2xl text-white bg-gradient-to-br from-indigo-400 to-teal-400 rounded-xl px-16 py-2">
                 Login
             </button>
-
-            <router-link to="/">
-                <button>
-                    click me
-                </button>
-            </router-link>
-
 
         </div>
 
