@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,8 +26,9 @@ class UserController extends Controller
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
-     */    
-    public function view($username) {
+     */
+    public function view($username)
+    {
         $user = User::find($username);
 
         if (isset($user)) {
@@ -54,7 +56,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $values = array (
+        $values = array(
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'first_name' => $request->first_name,
@@ -71,11 +73,11 @@ class UserController extends Controller
         ];
         $validation = Validator::make($values, $rules, $errormsg);
         $user = User::find($request->username);
-        if (isset($user)){
+        if (isset($user)) {
             return (new ResponseController)->toResponse(null, 400, ["username sudah dipakai!"]);
         }
         if ($validation->fails()) {
-            return (new ResponseController)->toResponse(null, 400, ["ada field kosong!"]); 
+            return (new ResponseController)->toResponse(null, 400, ["ada field kosong!"]);
         }
         return (new ResponseController)->toResponse(User::create($values), 200);
     }
@@ -119,14 +121,14 @@ class UserController extends Controller
             return (new ResponseController)->toResponse($user, 404, ["User dengan username " . $username . " tidak dapat ditemukan..."]);
         }
 
-        if(isset($request->username)) {
+        if (isset($request->username)) {
             $usertemp = User::find($request->username);
             if (isset($usertemp) && $user->username != $usertemp->username) {
                 return (new ResponseController)->toResponse(null, 400, ["username sudah dipakai!"]);
             }
             $user->username = $request->username;
         }
-        if(isset($request->first_name)){
+        if (isset($request->first_name)) {
             $user->first_name = $request->first_name;
         }
         $user->last_name = $request->last_name;
@@ -148,6 +150,6 @@ class UserController extends Controller
             return (new ResponseController)->toResponse($user->delete(), 200);
         }
 
-        return (new ResponseController)->toResponse(null, 404 , ["User dengan username " . $username . " tidak dapat ditemukan..."]);
+        return (new ResponseController)->toResponse(null, 404, ["User dengan username " . $username . " tidak dapat ditemukan..."]);
     }
 }
