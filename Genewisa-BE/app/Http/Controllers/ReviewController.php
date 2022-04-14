@@ -13,18 +13,20 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reviews = Review::all();
-        return (new ResponseController)->toResponse($reviews, 200);
+        if (!isset($request->key)) {
+            return (new ResponseController)->toResponse(Review::paginate(10), 200);
+        }
+        return $this::searchByKeyword($request->key);
     }
 
     /**
      * Display a listing of the resource by id.
      *
-     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */    
     public function view($id) {
@@ -35,16 +37,6 @@ class ReviewController extends Controller
         }
 
         return (new ResponseController)->toResponse($review, 404, ["Review dengan id " . $id . " tidak dapat ditemukan..."]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -102,32 +94,9 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request)
@@ -167,7 +136,6 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
@@ -180,5 +148,10 @@ class ReviewController extends Controller
         
         return (new ResponseController)->toResponse(null, 404);
 
+    }
+
+    private static function searchByKeyword($key) {
+        $reviews = Review::where('username', 'LIKE', '%'.$key.'%')->orWhere('comment', 'LIKE', '%'.$key.'%')->paginate(10);
+        return (new ResponseController)->toResponse($reviews, 200);
     }
 }
