@@ -7,6 +7,9 @@ export const useGeneralStore = defineStore("general", () => {
     const isEditing = ref(false);
     const pageNow = ref(1);
     const keywordNow = ref('');
+    const isDeleting = ref(0);
+    const deletedObject = ref('');
+    const isLogoutting = ref(0);
 
     const forgetToken = () => {
         token.value = '';
@@ -21,7 +24,7 @@ export const useGeneralStore = defineStore("general", () => {
     }
 
     return {
-        token, dashboardSection, forgetToken, setToken, setDashboardSection, isEditing, pageNow, keywordNow
+        token, dashboardSection, forgetToken, setToken, setDashboardSection, isEditing, pageNow, keywordNow, isDeleting, deletedObject, isLogoutting
     }
 
 }, {

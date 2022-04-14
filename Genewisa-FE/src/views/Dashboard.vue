@@ -3,10 +3,21 @@ import {useGeneralStore} from "../stores/General";
 import TableAkun from "../components/DashboardPage/DashboardAkun.vue";
 import TableReview from "../components/DashboardPage/DashboardReview.vue";
 import TableWisata from "../components/DashboardPage/DashboardWisata.vue";
+import DeleteModal from "../components/DashboardPage/DeleteModal.vue";
+import LogoutModal from "../components/DashboardPage/LogoutModal.vue";
 
-import {onMounted, ref} from 'vue'
+import {onMounted, onUnmounted, ref, watch} from 'vue'
 import router from "../router";
 import axios from "axios";
+
+const store = useGeneralStore();
+const keywordTemp = ref('');
+
+watch(() => store.isLogoutting, () => {
+    if (store.isLogoutting === 2) {
+        handleLogout();
+    }
+});
 
 onMounted(() => {
     const store = useGeneralStore();
@@ -15,9 +26,9 @@ onMounted(() => {
     }
 });
 
-
-const store = useGeneralStore();
-const keywordTemp = ref('');
+onUnmounted(() => {
+    store.isLogoutting = 0;
+});
 
 function handleLogout() {
     axios({
@@ -40,6 +51,9 @@ function handleLogout() {
 </script>
 
 <template>
+
+    <DeleteModal v-if="store.isDeleting == 1" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+    <LogoutModal v-if="store.isLogoutting == 1" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
     <div class="Dashboard">
         <div class="navbar-dashboard w-full bg-gradient-to-r from-indigo-300 to-indigo-400 py-5 px-12">
 
@@ -49,7 +63,7 @@ function handleLogout() {
                 </div>
 
                 <div class="basis-1/2 flex justify-end items-center">
-                    <button @click="handleLogout" id="logout" class="bg-white py-1 px-8 rounded-full text-indigo-400">
+                    <button @click="store.isLogoutting = 1" id="logout" class="bg-white py-1 px-8 rounded-full text-indigo-400">
                         Logout
                     </button>
                 </div>

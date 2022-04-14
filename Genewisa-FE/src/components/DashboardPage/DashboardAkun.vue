@@ -3,7 +3,6 @@ import axios from "axios";
 import {useGeneralStore} from "../../stores/General";
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import router from "../../router";
-import DeleteModal from "./DeleteModal.vue";
 
 const store = useGeneralStore();
 const listData = ref([]);
@@ -24,8 +23,17 @@ watch(() => store.keywordNow, () => {
     getData();
 });
 
+watch(() => store.isDeleting, () => {
+    if (store.isDeleting === 2) {
+        deleteData();
+        store.isDeleting = 0;
+    }
+});
+
 onUnmounted(() => {
     store.keywordNow = '';
+    store.isDeleting = 0;
+    store.deletedObject = '';
 });
 
 function getData() {
@@ -49,10 +57,10 @@ function getData() {
         });
 }
 
-function deleteData(username: string) {
+function deleteData() {
     axios({
         method: "delete",
-        url: "http://localhost:8000/api/user/" + username,
+        url: "http://localhost:8000/api/user/" + store.deletedObject,
         params: {
             token: store.token
         }
@@ -64,7 +72,8 @@ function deleteData(username: string) {
 }
 
 function confirmDelete(username: string){
-    confirmDel.value = true;
+    store.isDeleting = 1;
+    store.deletedObject = username;
 }
 
 onMounted(() => {
@@ -73,7 +82,6 @@ onMounted(() => {
 </script>
 
 <template>
-    <DeleteModal v-if="confirmDel" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
     <table class="table-fixed w-full">
         <thead>
         <tr>
