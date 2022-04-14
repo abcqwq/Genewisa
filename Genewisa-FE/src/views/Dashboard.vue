@@ -115,6 +115,11 @@ function handleLogout() {
                     <TableWisata v-else/>
                 </div>
 
+                <div class="flex justify-end">
+                    <button @click="store.pageNow--"> previous </button>
+                    <span> {{store.pageNow}} </span>
+                    <button @click="store.pageNow++"> next </button>
+                </div>
             </div>
 
         </div>

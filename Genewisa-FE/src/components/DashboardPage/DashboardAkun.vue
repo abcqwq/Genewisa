@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import axios from "axios";
 import {useGeneralStore} from "../../stores/General";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import router from "../../router";
 
 const store = useGeneralStore();
 const listData = ref([]);
+
+watch(() => store.pageNow, () => {
+    getData();
+});
+
 function getData() {
     axios({
         method: "get",
-        url: "http://localhost:8000/api/user",
+        url: "http://localhost:8000/api/user?page=" + store.pageNow + "&keyword=",
         params: {
             token: store.token
         }
     })
         .then((res) => {
-            listData.value = res.data.data;
+            listData.value = res.data.data.data;
+            store.pageNow = res.data.data.current_page;
+            if (listData.value.length == 0) {
+                store.pageNow--;
+            }
         })
         .catch((err) => console.log(err));
 }
