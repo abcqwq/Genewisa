@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import Dashboard from "../views/Dashboard.vue";
+import DeleteModal from "../components/DashboardPage/DeleteModal.vue";
 
 const routes = [
     {
