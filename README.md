@@ -1,6 +1,6 @@
 # Genewisa 
 
-Aplikasi rekomender tempat wisata Pulau Jawa.
+Aplikasi pemberi rekomendasi tempat wisata Pulau Jawa.
 
 ### Anggota Kelompok
 1. Butrahandisya
@@ -10,6 +10,7 @@ Aplikasi rekomender tempat wisata Pulau Jawa.
 
 ### Backend Techstack:
 - Laravel
+- MySQL
 
 ### Frontend Techstack:
 - Vue.js
