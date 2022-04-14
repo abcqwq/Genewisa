@@ -1,23 +1,50 @@
 <script setup lang="ts">
 import axios from "axios";
 import {useGeneralStore} from "../../stores/General";
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import router from "../../router";
 
 const store = useGeneralStore();
 const listData = ref([]);
+
+onMounted(() => {
+    const store = useGeneralStore();
+    if (store.token == '') {
+        router.push('/login');
+    }
+});
+
+watch(() => store.pageNow, () => {
+    getData();
+});
+
+watch(() => store.keywordNow, () => {
+    getData();
+});
+
+onUnmounted(() => {
+    store.keywordNow = '';
+});
+
 function getData() {
     axios({
         method: "get",
-        url: "http://localhost:8000/api/user",
+        url: "http://localhost:8000/api/user?page=" + store.pageNow + "&keyword=" + store.keywordNow,
         params: {
             token: store.token
         }
     })
         .then((res) => {
-            listData.value = res.data.data;
+            listData.value = res.data.data.data;
+            store.pageNow = res.data.data.current_page;
+            if (listData.value.length == 0) {
+                store.pageNow--;
+            }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            console.log(err);
+            store.forgetToken();
+        });
 }
 
 function deleteData(username: string) {

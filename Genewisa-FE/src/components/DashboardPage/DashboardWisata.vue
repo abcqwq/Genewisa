@@ -2,24 +2,50 @@
 import axios from "axios";
 import {useGeneralStore} from "../../stores/General";
 import EditModal from "./EditModal.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import router from "../../router";
 
 const store = useGeneralStore();
 const listData = ref([]);
 
+onMounted(() => {
+    const store = useGeneralStore();
+    if (store.token == '') {
+        router.push('/login');
+    }
+});
+
+watch(() => store.pageNow, () => {
+    getData();
+});
+
+watch(() => store.keywordNow, () => {
+    getData();
+});
+
+onUnmounted(() => {
+    store.keywordNow = '';
+});
+
 function getData() {
     axios({
         method: "get",
-        url: "http://localhost:8000/api/tempat-wisata",
+        url: "http://localhost:8000/api/tempat-wisata?page=" + store.pageNow + "&key=" + store.keywordNow,
         params: {
             token: store.token
         }
     })
         .then((res) => {
-            listData.value = res.data.data;
+            listData.value = res.data.data.data;
+            store.pageNow = res.data.data.current_page;
+            if (listData.value.length == 0) {
+                store.pageNow--;
+            }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            console.log(err);
+            store.forgetToken();
+        });
 }
 
 const dataModal = ref({});
@@ -28,6 +54,10 @@ function setDataModal(dataWisata: object) {
     dataModal.value = dataWisata;
     store.isEditing = true;
 }
+
+onUnmounted(() => {
+    store.isEditing = false;
+});
 
 function deleteData(id: any) {
     axios({
