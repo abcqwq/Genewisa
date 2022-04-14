@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {useGeneralStore} from "../../stores/General";
 
+const store = useGeneralStore();
 </script>
 
 <template>
@@ -26,8 +28,8 @@
         </div>
 
         <div class="flex">
-            <button class="basis-1/2 bg-gradient-to-br from-slate-200 to-slate-300 py-1">Batal</button>
-            <button class="basis-1/2 bg-gradient-to-br from-red-400 to-rose-500 text-white py-1">Hapus</button>
+            <button @click="store.isDeleting = 0" class="basis-1/2 bg-gradient-to-br from-slate-200 to-slate-300 py-1">Batal</button>
+            <button @click="store.isDeleting = 2" class="basis-1/2 bg-gradient-to-br from-red-400 to-rose-500 text-white py-1">Hapus</button>
         </div>
     </div>
 </template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {useGeneralStore} from "../../stores/General";
 
+const store = useGeneralStore();
 </script>
 
 <template>
@@ -23,8 +25,8 @@
         </div>
 
         <div class="flex">
-            <button class="basis-1/2 bg-gradient-to-br from-slate-200 to-slate-300 py-1">Batal</button>
-            <button class="basis-1/2 bg-gradient-to-br from-red-300 to-pink-400 text-white py-1">Logout</button>
+            <button @click="store.isLogoutting = 0"  class="basis-1/2 bg-gradient-to-br from-slate-200 to-slate-300 py-1">Batal</button>
+            <button @click="store.isLogoutting = 2" class="basis-1/2 bg-gradient-to-br from-red-300 to-pink-400 text-white py-1">Logout</button>
         </div>
     </div>
 </template>
