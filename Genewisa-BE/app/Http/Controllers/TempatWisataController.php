@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\TempatWisata;
-use App\Http\Requests\StoreTempatWisataRequest;
-use App\Http\Requests\UpdateTempatWisataRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -12,14 +10,16 @@ class TempatWisataController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @param  Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
 
-    public function index() {
-        $tempatWisata = TempatWisata::all();
-        
-        return (new ResponseController)->toResponse($tempatWisata, 200);
+    public function index(Request $request) {
+        if (!isset($request->key)) {
+            return (new ResponseController)->toResponse(TempatWisata::paginate(10), 200);
+        }
+        return $this::searchByKeyword($request->key);
     }
 
 
@@ -38,15 +38,6 @@ class TempatWisataController extends Controller
         return (new ResponseController)->toResponse($tempatWisata, 404, ["Tempat wisata dengan id " . $id . " tidak dapat ditemukan..."]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // return view form create
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -74,33 +65,9 @@ class TempatWisataController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TempatWisata  $tempatWisata
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TempatWisata $tempatWisata)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TempatWisata  $tempatWisata
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $tempatWisata = TempatWisata::find($id);
-        // return view edit form
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  Illuminate\Http\Request  $request
-     * @param  \App\Models\TempatWisata  $tempatWisata
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request)
@@ -135,7 +102,6 @@ class TempatWisataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TempatWisata  $tempatWisata
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
@@ -148,5 +114,10 @@ class TempatWisataController extends Controller
         
         return (new ResponseController)->toResponse(null, 404, ["Tempat wisata dengan id " . $id . " tidak dapat ditemukan..."]);
 
+    }
+
+    private static function searchByKeyword($key) {
+        $tempatWisata = TempatWisata::where('name', 'LIKE', '%'.$key.'%')->orWhere('city', 'LIKE', '%'.$key.'%')->paginate(10);
+        return (new ResponseController)->toResponse($tempatWisata, 200);
     }
 }
