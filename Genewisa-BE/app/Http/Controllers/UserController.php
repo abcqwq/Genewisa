@@ -14,9 +14,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if (isset($request->keyword)) {
+            return $this::searchByKeyword($request->keyword);
+        }
+        $users = User::paginate(10);
         return (new ResponseController)->toResponse($users, 200);
     }
 
@@ -151,5 +154,11 @@ class UserController extends Controller
         }
 
         return (new ResponseController)->toResponse(null, 404, ["User dengan username " . $username . " tidak dapat ditemukan..."]);
+    }
+
+    private static function searchByKeyword($keyword)
+    {
+        $user = User::where('username', 'LIKE', '%' .$keyword. '%')->orWhere('first_name', 'LIKE', '%' .$keyword. '%')->orWhere('last_name', 'LIKE', '%' .$keyword. '%')->paginate(10);
+        return (new ResponseController)->toResponse($user, 200);
     }
 }
