@@ -16,3 +16,4 @@ Aplikasi pemberi rekomendasi tempat wisata Pulau Jawa.
 - Vue.js
 - Pinia
 - TailwindCSS
+- Flutter
