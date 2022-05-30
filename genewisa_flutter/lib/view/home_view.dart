@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -14,7 +12,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        automaticallyImplyLeading: false,
+        title: const Text('Genewisa'),
       ),
     );
   }
