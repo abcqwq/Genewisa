@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../theme/genewisa_text_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AuthTextField extends StatefulWidget {
   AuthTextField({Key? key, required this.hintText}) : super(key: key);
@@ -16,7 +18,21 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return TextFormField(
       controller: widget.textController,
       decoration: InputDecoration(
-        hintText: widget.hintText,
+        labelText: widget.hintText,
+        labelStyle: GenewisaTextTheme.textTheme.bodyText1,
+        errorStyle: GoogleFonts.quicksand(),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.black),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.black),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Color(0xFF9FACE6)),
+        ),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

@@ -9,9 +9,35 @@ class GenewisaTheme {
 
   static ButtonStyle geneButton() {
     return ElevatedButton.styleFrom(
-      primary: Colors.blue[900],
+      primary: Colors.transparent,
+      shadowColor: Colors.transparent,
       textStyle: const TextStyle(fontSize: 18),
-      padding: const EdgeInsets.all(15),
+      minimumSize: const Size.fromHeight(63),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+  }
+
+  static BoxDecoration authButtonContainer() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      gradient: const LinearGradient(
+        colors: <Color>[
+          Color(0xFF9FACE6),
+          Color(0xFF74EBD5),
+        ]
+      )
+    );
+  }
+
+  static BoxDecoration authContainer() {
+    return BoxDecoration(
+      border: Border.all(
+        color: Colors.black,
+        width: 1,
+      ),
+      borderRadius: const BorderRadius.all(Radius.circular(40)),
     );
   }
 }
