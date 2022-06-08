@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/view/widget/auth_container_header.dart';
+import '../widget/auth_text_field.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
-import '../../view/widget/auth_text_field.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key? key}) : super(key: key);
@@ -12,83 +14,77 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
-    final _formKey = GlobalKey<FormState>();
-
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Genewisa', 
-                style: GenewisaTextTheme.textTheme.headline1,
-              ),
-              const SizedBox(height: 20.0,),
-              Text(
-                'Login', 
-                style: GenewisaTextTheme.textTheme.headline2,
-              ),
-              const SizedBox(height: 40.0,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.person,
-                    color: Colors.blue[600],
-                    size: 30,
+      body: Center(
+        child: Container(
+          width: 271,
+          height: 529,
+          decoration: GenewisaTheme.authContainer(),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const AuthContainerHeader(),
+                SizedBox(
+                  height: 314,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(top: 0, child: AuthTextField(hintText: 'Username')),
+                      Positioned(top: 79, child: AuthTextField(hintText: 'Password')),
+                      Positioned(
+                        top: 158,
+                        child: SizedBox(
+                          width: 228,
+                          height: 53,
+                          child: Container(
+                            decoration: GenewisaTheme.authButtonContainer(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pushNamed(context, '/');
+                                }
+                              },
+                              style: GenewisaTheme.geneButton(),
+                              child: Text(
+                                'Login',
+                                style: GenewisaTextTheme.textTheme.button,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 237,
+                        child: RichText(
+                          text: TextSpan(
+                            style: GenewisaTextTheme.textTheme.bodyText1,
+                            children: <TextSpan>[
+                              const TextSpan(text: 'Tidak punya akun? '),
+                              TextSpan(
+                                text: 'Daftar',
+                                style: GenewisaTextTheme.textTheme.bodyText2,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap=() {
+                                    Navigator.pushNamed(context, '/signup');
+                                  }, 
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 10,),
-                  Expanded(
-                    child: AuthTextField(hintText: 'Username')
-                  ),
-                ],
-              ),
-              
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.lock,
-                    color: Colors.blue[600],
-                    size: 30,
-                  ),
-                  const SizedBox(width: 10,),
-                  Expanded(
-                    child: AuthTextField(hintText: 'Password')
-                  ),
-                ],
-              ),
-              
-              const SizedBox(height: 20.0,),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, '/');
-                  }
-                },
-                style: GenewisaTheme.geneButton(),
-                child: const Text('Login'),
-              ),
-              const SizedBox(height: 40.0,),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
-                },
-                style: GenewisaTheme.geneButton(),
-                child: const Text('Sign Up'),
-              )
-            ],
+                ),
+                
+              ],
+            ),
           ),
         ),
       ),

@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GenewisaTextTheme {
   static TextTheme textTheme = TextTheme(
-    headline1: TextStyle(
-      fontSize: 42,
-      fontWeight: FontWeight.bold,
-      color: Colors.blue[600],
+    headline1: GoogleFonts.quicksand(
+      fontSize: 46,
+      color: Colors.black,
     ),
-    headline2: TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.bold,
-      color: Colors.blue[900]
+    bodyText1: GoogleFonts.quicksand(
+      fontSize: 14,
+      color: Colors.black,
     ),
+    bodyText2: GoogleFonts.quicksand(
+      fontSize: 14,
+      color: const Color(0xFF9FACE6),
+      fontWeight: FontWeight.bold,
+    ),
+    button: GoogleFonts.quicksand(
+      fontSize: 14,
+      color: Colors.white,
+    )
   );
 }
