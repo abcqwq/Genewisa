@@ -15,7 +15,14 @@ class _HomeAppBarState extends State<HomeAppBar>{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('App Bar', style: TextStyle(color: Colors.black),),
+      title: Text(
+        'Genewisa',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.normal
+        ),
+      ),
       backgroundColor: Colors.white,
       elevation: 0,
     );
