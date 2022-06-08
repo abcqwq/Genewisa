@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/view/widget/auth_container_header.dart';
+import '../../view/widget/auth_container_header.dart';
 import '../widget/auth_text_field.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -82,7 +82,6 @@ class _LoginViewState extends State<LoginView> {
                     ],
                   ),
                 ),
-                
               ],
             ),
           ),
