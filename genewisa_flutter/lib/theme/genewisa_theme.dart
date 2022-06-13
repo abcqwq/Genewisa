@@ -31,13 +31,14 @@ class GenewisaTheme {
     );
   }
 
-  static BoxDecoration authContainer() {
+  static BoxDecoration tileContainer({color = Colors.transparent}) {
     return BoxDecoration(
       border: Border.all(
         color: Colors.black,
         width: 1,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(40)),
+      color: color,
     );
   }
 }

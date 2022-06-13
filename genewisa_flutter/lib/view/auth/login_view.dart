@@ -23,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
         child: Container(
           width: 271,
           height: 529,
-          decoration: GenewisaTheme.authContainer(),
+          decoration: GenewisaTheme.tileContainer(),
           child: Form(
             key: _formKey,
             child: Column(
