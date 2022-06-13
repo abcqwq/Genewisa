@@ -1,7 +1,66 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../view/profile_view.dart';
 import '../view/widget/home_app_bar.dart';
+
+class HomeCardMenu extends StatefulWidget {
+  final String? sm_text;
+  final String lg_text, img;
+
+  const HomeCardMenu({
+    Key? key,
+    required this.sm_text,
+    required this.lg_text,
+    required this.img
+  }) : super(key: key);
+
+  @override
+  State<HomeCardMenu> createState() => _HomeCardMenuState();
+}
+
+class _HomeCardMenuState extends State<HomeCardMenu> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 142,
+      height: 228,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30)
+      ),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: SvgPicture.asset(
+              widget.img,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          Container(
+            //alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.only(left: 18, bottom: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.sm_text==null? "" : widget.sm_text.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  widget.lg_text,
+                  style: TextStyle(fontSize: 24),
+                )
+              ],
+            ),
+          ),
+        ],
+      )
+    );
+  }
+}
+
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -14,8 +73,67 @@ class _HomeViewState extends State<HomeView> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeContent(),
+  late List<Widget> _widgetOptions = <Widget>[
+    Padding(
+      padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                child: HomeCardMenu(
+                  sm_text: "Generate",
+                  lg_text: "Wisata",
+                  img: "generate_wisata_card.svg",
+                ),
+                onTap: (){
+                  _onItemTapped(1);
+                },
+              ),
+              InkWell(
+                child: HomeCardMenu(
+                  sm_text: "Tempat",
+                  lg_text: "Wisata",
+                  img: "tempat_wisata_card.svg",
+                ),
+                onTap: (){
+                  _onItemTapped(2);
+                },
+              )
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 14),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  child: HomeCardMenu(
+                    sm_text: "Saved",
+                    lg_text: "Wisata",
+                    img: "saved_wisata_card.svg",
+                  ),
+                  onTap: (){
+                  _onItemTapped(3);
+                  },
+                ),
+                InkWell(
+                  child: HomeCardMenu(
+                    sm_text: null,
+                    lg_text: "Profile",
+                    img: "profile_card.svg",
+                  ),
+                  onTap: (){
+                    _onItemTapped(4);
+                  },
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
     Text(
       'Index 1: Generate',
       style: optionStyle,
@@ -56,14 +174,14 @@ class _HomeViewState extends State<HomeView> {
             icon: SvgPicture.asset(
               '/navbar/inactive/home_icon.svg',
               semanticsLabel: 'Home Icon',
-              width: 28,
-              height: 28,
+              width: 30,
+              height: 30,
             ),
             activeIcon: SvgPicture.asset(
               '/navbar/active/home_active_icon.svg',
               semanticsLabel: 'Home Icon',
-              width: 28,
-              height: 28,
+              width: 30,
+              height: 30,
             ),
             label: 'Home',
           ),
@@ -71,14 +189,14 @@ class _HomeViewState extends State<HomeView> {
             icon: SvgPicture.asset(
               '/navbar/inactive/generate_icon.svg',
               semanticsLabel: 'Generate Icon',
-              width: 28,
-              height: 28,
+              width: 30,
+              height: 30,
             ),
             activeIcon: SvgPicture.asset(
               '/navbar/active/generate_active_icon.svg',
               semanticsLabel: 'Generate Icon',
-              width: 28,
-              height: 28,
+              width: 30,
+              height: 30,
             ),
             label: 'Generate',
           ),
@@ -86,14 +204,14 @@ class _HomeViewState extends State<HomeView> {
             icon: SvgPicture.asset(
               '/navbar/inactive/search_icon.svg',
               semanticsLabel: 'Search Icon',
-              width: 28,
-              height: 28,
+              width: 28.5,
+              height: 28.5,
             ),
             activeIcon: SvgPicture.asset(
               '/navbar/active/search_active_icon.svg',
               semanticsLabel: 'Search Icon',
-              width: 28,
-              height: 28,
+              width: 28.5,
+              height: 28.5,
             ),
             label: 'Search',
           ),
@@ -101,14 +219,14 @@ class _HomeViewState extends State<HomeView> {
             icon: SvgPicture.asset(
               '/navbar/inactive/saved_icon.svg',
               semanticsLabel: 'Saved Icon',
-              width: 28,
-              height: 28,
+              width: 27,
+              height: 27,
             ),
             activeIcon: SvgPicture.asset(
               '/navbar/active/saved_active_icon.svg',
               semanticsLabel: 'Saved Icon',
-              width: 28,
-              height: 28,
+              width: 27,
+              height: 27,
             ),
             label: 'Saved',
           ),
@@ -129,117 +247,7 @@ class _HomeViewState extends State<HomeView> {
           )
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF9FACE6),
         onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class HomeContent extends StatelessWidget {
-  const HomeContent({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 142,
-                height: 228,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFFEE57),
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                child: Container(
-                  //alignment: Alignment.bottomLeft,
-                  padding: EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Generate"),
-                      Text("Wisata", style: TextStyle(fontSize: 24),)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 142,
-                height: 228,
-                decoration: BoxDecoration(
-                    color: Color(0xFFFFAEAE),
-                    borderRadius: BorderRadius.circular(30)
-                ),
-                child: Container(
-                  //alignment: Alignment.bottomLeft,
-                  padding: EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Tempat"),
-                      Text("Wisata", style: TextStyle(fontSize: 24),)
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 14),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 142,
-                  height: 228,
-                  decoration: BoxDecoration(
-                      color: Color(0xFFBBBAFF),
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Container(
-                    //alignment: Alignment.bottomLeft,
-                    padding: EdgeInsets.all(25),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Saved"),
-                        Text("Wisata", style: TextStyle(fontSize: 24),)
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 142,
-                  height: 228,
-                  decoration: BoxDecoration(
-                      color: Color(0xFFD9D9D9),
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Container(
-                    //alignment: Alignment.bottomLeft,
-                    padding: EdgeInsets.all(25),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Profil", style: TextStyle(fontSize: 24),)
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
       ),
     );
   }
