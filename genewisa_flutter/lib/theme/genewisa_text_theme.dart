@@ -3,8 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class GenewisaTextTheme {
   static TextTheme textTheme = TextTheme(
+    headlineLarge: GoogleFonts.quicksand(
+      fontSize: 64,
+      color: Colors.black,
+    ),
     headline1: GoogleFonts.quicksand(
       fontSize: 46,
+      color: Colors.black,
+    ),
+    headline2: GoogleFonts.quicksand(
+      fontSize: 24,
       color: Colors.black,
     ),
     bodyText1: GoogleFonts.quicksand(

@@ -22,7 +22,7 @@ class _SignUpViewState extends State<SignUpView> {
         child: Container(
           width: 271,
           height: 608,
-          decoration: GenewisaTheme.authContainer(),
+          decoration: GenewisaTheme.tileContainer(),
           child: Form(
             key: _formKey,
             child: Column(
