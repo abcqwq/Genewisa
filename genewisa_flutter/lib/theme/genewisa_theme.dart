@@ -37,7 +37,7 @@ class GenewisaTheme {
         color: Colors.black,
         width: 1,
       ),
-      borderRadius: const BorderRadius.all(Radius.circular(40)),
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
       color: color,
     );
   }

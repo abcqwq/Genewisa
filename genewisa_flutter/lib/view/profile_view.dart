@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../theme/genewisa_text_theme.dart';
@@ -14,6 +15,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(
@@ -21,7 +23,7 @@ class _ProfileViewState extends State<ProfileView> {
           children: <Widget>[
             Container(
               height: 168,
-              margin: const EdgeInsets.only(top: 15, bottom: 15, left: 30, right: 30),
+              margin: const EdgeInsets.only(top: 20, bottom: 15, left: 30, right: 30),
               decoration: GenewisaTheme.tileContainer(color: const Color(0xFFFFEE57)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
