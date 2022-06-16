@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/view/setting_view.dart';
 import '../theme/genewisa_theme.dart';
 import '../view/auth/signup_view.dart';
 import '../view/auth/login_view.dart';
@@ -21,6 +22,7 @@ class GenewisaApp extends StatelessWidget {
         '/login': (context) => LoginView(),
         '/signup':(context) => SignUpView(),
         '/': (context) => HomeView(), 
+        '/setting': (context) => SettingView(), 
       },
     );
   }

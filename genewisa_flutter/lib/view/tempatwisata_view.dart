@@ -56,12 +56,12 @@ class _TempatWisataViewState extends State<TempatWisataView> {
             TextField(
               onChanged: (value) => _runFilter(value),
               decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      labelText: 'Search',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      ),
-                    ),
+                prefixIcon: Icon(Icons.search),
+                labelText: 'Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -71,11 +71,11 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                   ? ListView.builder(
                       itemCount: _foundWisata.length,
                       itemBuilder: (context, index) => ListWisataContainer(
-                      nama: _foundWisata[index]["nama"].toString(),
-                      lokasi: _foundWisata[index]["lokasi"].toString(),
-                      url: _foundWisata[index]["url"].toString(),
-                      rating: _foundWisata[index]["rating"],
-                    )
+                        nama: _foundWisata[index]["nama"].toString(),
+                        lokasi: _foundWisata[index]["lokasi"].toString(),
+                        url: _foundWisata[index]["url"].toString(),
+                        rating: _foundWisata[index]["rating"],
+                      )
                     )
                   : const Text(
                       'Pencarian tidak ditemukan',
