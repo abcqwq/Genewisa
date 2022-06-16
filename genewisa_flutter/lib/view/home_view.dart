@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:genewisa_flutter/view/saved_view.dart';
+import 'package:genewisa_flutter/view/tempatwisata_view.dart';
 import '../view/profile_view.dart';
 import '../view/widget/home_app_bar.dart';
 
@@ -139,10 +140,7 @@ class _HomeViewState extends State<HomeView> {
       'Index 1: Generate',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: Search',
-      style: optionStyle,
-    ),
+    TempatWisataView(),
     SavedView(),
     ProfileView(),
   ];
