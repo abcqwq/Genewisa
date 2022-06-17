@@ -6,9 +6,7 @@ import '../view/auth/signup_view.dart';
 import '../view/auth/login_view.dart';
 import '../view/home_view.dart';
 
-void main() {
-  runApp(const GenewisaApp());
-}
+void main() => runApp(const GenewisaApp());
 
 class GenewisaApp extends StatelessWidget {
   const GenewisaApp({Key? key}) : super(key: key);
@@ -16,16 +14,16 @@ class GenewisaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Genewisa',
       theme: GenewisaTheme.geneTheme(),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
         '/login': (context) => LoginView(),
         '/signup':(context) => SignUpView(),
         '/': (context) => HomeView(), 
         '/detailwisata': (context) => DetailWisataView(),
-        '/setting': (context) => SettingsView(), 
+        '/settings': (context) => SettingsView(), 
       },
     );
   }
