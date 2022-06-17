@@ -31,6 +31,18 @@ class GenewisaTheme {
     );
   }
 
+  static BoxDecoration cancelButtonContainer() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      gradient: const LinearGradient(
+        colors: <Color>[
+          Color.fromARGB(255, 135, 0, 0),
+          Color.fromARGB(255, 255, 0, 0),
+        ]
+      )
+    );
+  }
+
   static BoxDecoration tileContainer({color = Colors.transparent}) {
     return BoxDecoration(
       border: Border.all(

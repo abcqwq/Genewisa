@@ -12,11 +12,11 @@ class TempatWisataView extends StatefulWidget {
 class _TempatWisataViewState extends State<TempatWisataView> {
 
   final List<Map<String, dynamic>> _allWisata = [
-    {"nama": "Wisata 1", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"nama": "Wisata 2", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"nama": "Wisata 3", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bogor, Jawa Barat", "rating": 5 },
-    {"nama": "Wisata 4", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"nama": "Wisata 5", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":1, "nama": "Wisata 1", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":2, "nama": "Wisata 2", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":3, "nama": "Wisata 3", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bogor, Jawa Barat", "rating": 5 },
+    {"id":4, "nama": "Wisata 4", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":5, "nama": "Wisata 5", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
   ];
 
   List<Map<String, dynamic>> _foundWisata = [];
@@ -70,12 +70,21 @@ class _TempatWisataViewState extends State<TempatWisataView> {
               child: _foundWisata.isNotEmpty
                   ? ListView.builder(
                       itemCount: _foundWisata.length,
-                      itemBuilder: (context, index) => ListWisataContainer(
-                      nama: _foundWisata[index]["nama"].toString(),
-                      lokasi: _foundWisata[index]["lokasi"].toString(),
-                      url: _foundWisata[index]["url"].toString(),
-                      rating: _foundWisata[index]["rating"],
-                    )
+                      itemBuilder: (context, index) => InkWell(
+                        child: ListWisataContainer(
+                          nama: _foundWisata[index]["nama"].toString(),
+                          lokasi: _foundWisata[index]["lokasi"].toString(),
+                          url: _foundWisata[index]["url"].toString(),
+                          rating: _foundWisata[index]["rating"],
+                        ),
+                        onTap: () {                          
+                          Navigator.pushNamed(
+                            context,
+                            '/detailwisata',
+                            arguments: _foundWisata[index],
+                          );
+                        },
+                      ),
                     )
                   : const Text(
                       'Pencarian tidak ditemukan',
