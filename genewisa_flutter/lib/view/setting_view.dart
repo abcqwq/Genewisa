@@ -42,66 +42,73 @@ class _SettingView extends State<SettingView> {
       body: Container(
         color: Colors.white,
         child:SingleChildScrollView(
-          child:Column(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 20),
-                child: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  radius: 100,
-                ),
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children:[
-                    SettingTextField(hintText:"Nama lengkap"),
-                    SettingTextField(hintText:"Username"),
-                    SettingTextField(hintText:"Password Lama"),
-                    SettingTextField(hintText:"Password Baru"),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          width: 150,
-                          height: 53,
-                          decoration: GenewisaTheme.cancelButtonContainer(),
-                          child: ElevatedButton(
-                            onPressed: () {
-                                Navigator.pop(context);
-                            },
-                            style: GenewisaTheme.geneButton(),
-                            child: Text(
-                              'X',
-                              style: GenewisaTextTheme.textTheme.button,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          height: 53,
-                          decoration: GenewisaTheme.authButtonContainer(),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, '/');
-                              }
-                            },
-                            style: GenewisaTheme.geneButton(),
-                            child: Text(
-                              'Simpan',
-                              style: GenewisaTextTheme.textTheme.button,
-                            ),
-                          ),
-                        ),
-                      ],
+          child:Padding(
+            padding: const EdgeInsets.only(left: 30,right: 30, top: 20),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: const CircleAvatar(
+                    radius: 100,
+                    backgroundColor: Colors.black,
+                    child: const CircleAvatar(
+                      backgroundImage: NetworkImage("https://images-ext-1.discordapp.net/external/8cWjK0gRjXAALR4npR2qYFVscpnJEkFoyWBAVQszngQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/707445135318974515/93ac9643a293a7ae11b3375beb63fc44.png?width=480&height=480"),
+                      radius: 98,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children:[
+                      SettingTextField(hintText:"Nama lengkap"),
+                      SettingTextField(hintText:"Username"),
+                      SettingTextField(hintText:"Password Lama"),
+                      SettingTextField(hintText:"Password Baru"),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 140,
+                            height: 53,
+                            decoration: GenewisaTheme.cancelButtonContainer(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                              style: GenewisaTheme.geneButton(),
+                              child: Text(
+                                'X',
+                                style: GenewisaTextTheme.textTheme.button,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 140,
+                            height: 53,
+                            decoration: GenewisaTheme.authButtonContainer(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pushNamed(context, '/');
+                                }
+                              },
+                              style: GenewisaTheme.geneButton(),
+                              child: Text(
+                                'Simpan',
+                                style: GenewisaTextTheme.textTheme.button,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

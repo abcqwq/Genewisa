@@ -44,7 +44,7 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
               child: CircleAvatar(
                 backgroundImage: NetworkImage(widget.url),
                 backgroundColor: Colors.transparent,
-                radius: 36,
+                radius: 25,
               ),
             ),
             Column(

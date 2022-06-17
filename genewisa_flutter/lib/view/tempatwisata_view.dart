@@ -12,11 +12,11 @@ class TempatWisataView extends StatefulWidget {
 class _TempatWisataViewState extends State<TempatWisataView> {
 
   final List<Map<String, dynamic>> _allWisata = [
-    {"id":1, "nama": "Wisata 1", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"id":2, "nama": "Wisata 2", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"id":3, "nama": "Wisata 3", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bogor, Jawa Barat", "rating": 5 },
-    {"id":4, "nama": "Wisata 4", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
-    {"id":5, "nama": "Wisata 5", "url": "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":1, "nama": "Wisata 1", "url": "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":2, "nama": "Wisata 2", "url": "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":3, "nama": "Wisata 3", "url": "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", "lokasi": "Bogor, Jawa Barat", "rating": 5 },
+    {"id":4, "nama": "Wisata 4", "url": "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
+    {"id":5, "nama": "Wisata 5", "url": "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", "lokasi": "Bandung, Jawa Barat", "rating": 5 },
   ];
 
   List<Map<String, dynamic>> _foundWisata = [];
@@ -47,11 +47,11 @@ class _TempatWisataViewState extends State<TempatWisataView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 30,right: 30, top: 20),
         child: Column(
           children: [
             const SizedBox(
-              height: 20,
+              height: 0,
             ),
             TextField(
               onChanged: (value) => _runFilter(value),

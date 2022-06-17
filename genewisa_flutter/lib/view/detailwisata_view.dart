@@ -78,7 +78,7 @@ class _DetailWisataView extends State<DetailWisataView> {
         child: Column(
           children: [
             ListDeskripsiWisataContainer(tittle: "Deskripsi" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit."),
-            ListReviewContainer(nama: "Aldo" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit.", rating: 5, url: "https://cdn.discordapp.com/attachments/750943064415010849/987288028340953169/nobita.jpg"),
+            ListReviewContainer(nama: "Aldo" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit.", rating: 5, url: "https://images-ext-2.discordapp.net/external/ZayLKwlpb-DfZ8j9oobtSKa4Xv5rDU6-5k4NPZvMRfQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/432610292342587392/29cb28fbf65a3958105026ab03abd306.png?width=480&height=480"),
             SizedBox(height: 50),
           ],
         ),

@@ -24,13 +24,13 @@ class _SavedViewState extends State<SavedView> {
               ListWisataContainer(
                 nama: "Wisata 1",
                 lokasi: "Bandung, Jawa Barat",
-                url: "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg",
+                url: "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",
                 rating: 5,
               ),
               ListWisataContainer(
                 nama: "Wisata 2",
                 lokasi: "Bogor, Jawa Barat",
-                url: "https://cdn.discordapp.com/attachments/976696861207433219/984030204844453888/Rectangle_3.jpg",
+                url: "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",
                 rating: 5,
               )
             ],

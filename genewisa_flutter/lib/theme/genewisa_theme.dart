@@ -36,8 +36,8 @@ class GenewisaTheme {
       borderRadius: BorderRadius.circular(20),
       gradient: const LinearGradient(
         colors: <Color>[
-          Color.fromARGB(255, 135, 0, 0),
-          Color.fromARGB(255, 255, 0, 0),
+          Color(0xFFFF3434),
+          Color(0xFF848AA5),
         ]
       )
     );

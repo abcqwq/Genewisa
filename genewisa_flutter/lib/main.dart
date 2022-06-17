@@ -16,6 +16,7 @@ class GenewisaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Genewisa',
       theme: GenewisaTheme.geneTheme(),
       initialRoute: '/login',

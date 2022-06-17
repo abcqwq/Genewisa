@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:genewisa_flutter/theme/genewisa_text_theme.dart';
 import 'package:genewisa_flutter/view/saved_view.dart';
 import 'package:genewisa_flutter/view/tempatwisata_view.dart';
 import '../view/profile_view.dart';
@@ -9,13 +10,15 @@ import '../view/widget/home_app_bar.dart';
 class HomeCardMenu extends StatefulWidget {
   final String? sm_text;
   final String lg_text, img;
+  final int color;
 
-  const HomeCardMenu({
-    Key? key,
-    required this.sm_text,
-    required this.lg_text,
-    required this.img
-  }) : super(key: key);
+  const HomeCardMenu(
+      {Key? key,
+      required this.sm_text,
+      required this.lg_text,
+      required this.img,
+      required this.color})
+      : super(key: key);
 
   @override
   State<HomeCardMenu> createState() => _HomeCardMenuState();
@@ -25,44 +28,46 @@ class _HomeCardMenuState extends State<HomeCardMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 142,
-      height: 228,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30)
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SvgPicture.asset(
-              widget.img,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          Container(
-            //alignment: Alignment.bottomLeft,
-            padding: EdgeInsets.only(left: 18, bottom: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.sm_text==null? "" : widget.sm_text.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold),
+        width: 142,
+        height: 228,
+        decoration: BoxDecoration(
+            color: Color(widget.color), borderRadius: BorderRadius.circular(30)),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: SvgPicture.asset(
+                  widget.img,
+                  allowDrawingOutsideViewBox: true,
+                  //clipBehavior: Clip,
+                  fit: BoxFit.none,
                 ),
-                Text(
-                  widget.lg_text,
-                  style: TextStyle(fontSize: 24),
-                )
-              ],
+              ),
             ),
-          ),
-        ],
-      )
-    );
+            Container(
+              //alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.only(left: 18, bottom: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.sm_text == null ? "" : widget.sm_text.toString(),
+                    style: GenewisaTextTheme.textTheme.headline4,
+                  ),
+                  Text(
+                    widget.lg_text,
+                    style: GenewisaTextTheme.textTheme.headline3,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }
-
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -74,7 +79,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   late List<Widget> _widgetOptions = <Widget>[
     Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
@@ -88,8 +93,9 @@ class _HomeViewState extends State<HomeView> {
                   sm_text: "Generate",
                   lg_text: "Wisata",
                   img: "generate_wisata_card.svg",
+                  color: 0xFFFFEE57,
                 ),
-                onTap: (){
+                onTap: () {
                   _onItemTapped(1);
                 },
               ),
@@ -98,8 +104,9 @@ class _HomeViewState extends State<HomeView> {
                   sm_text: "Tempat",
                   lg_text: "Wisata",
                   img: "tempat_wisata_card.svg",
+                  color: 0xFFFFAEAE,
                 ),
-                onTap: (){
+                onTap: () {
                   _onItemTapped(2);
                 },
               )
@@ -115,9 +122,10 @@ class _HomeViewState extends State<HomeView> {
                     sm_text: "Saved",
                     lg_text: "Wisata",
                     img: "saved_wisata_card.svg",
+                    color: 0xFFBBBAFF,
                   ),
-                  onTap: (){
-                  _onItemTapped(3);
+                  onTap: () {
+                    _onItemTapped(3);
                   },
                 ),
                 InkWell(
@@ -125,8 +133,9 @@ class _HomeViewState extends State<HomeView> {
                     sm_text: null,
                     lg_text: "Profile",
                     img: "profile_card.svg",
+                    color: 0xFFD9D9D9,
                   ),
-                  onTap: (){
+                  onTap: () {
                     _onItemTapped(4);
                   },
                 )

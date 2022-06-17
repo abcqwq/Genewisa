@@ -27,6 +27,13 @@ class GenewisaTextTheme {
     button: GoogleFonts.quicksand(
       fontSize: 14,
       color: Colors.white,
-    )
+    ),
+    headline3: GoogleFonts.quicksand(
+      fontSize: 24,
+    ),
+    headline4: GoogleFonts.quicksand(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }
