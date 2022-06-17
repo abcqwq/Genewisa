@@ -48,6 +48,8 @@ class _HomeAppBarState extends State<HomeAppBar>{
           onSelected: (selected) {
             if (selected == 'Log Out') {
               Navigator.pushNamed(context, '/login');
+            }else if(selected == 'Settings'){
+              Navigator.pushNamed(context, '/setting');
             }
           },
           itemBuilder: (_) => <PopupMenuEntry>[

@@ -56,12 +56,12 @@ class _TempatWisataViewState extends State<TempatWisataView> {
             TextField(
               onChanged: (value) => _runFilter(value),
               decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      labelText: 'Search',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      ),
-                    ),
+                prefixIcon: Icon(Icons.search),
+                labelText: 'Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
