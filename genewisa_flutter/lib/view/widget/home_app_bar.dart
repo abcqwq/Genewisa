@@ -53,13 +53,13 @@ class _HomeAppBarState extends State<HomeAppBar>{
             }
           },
           itemBuilder: (_) => <PopupMenuEntry>[
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'Settings',
-              child: Text('Settings'),
+              child: Text('Settings', style: GenewisaTextTheme.textTheme.headline6,),
             ),
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'Log Out',
-              child: Text('Log Out', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+              child: Text('Log Out', style: GenewisaTextTheme.textTheme.headline5,),
             ),
           ],
         ),
@@ -69,7 +69,6 @@ class _HomeAppBarState extends State<HomeAppBar>{
       elevation: 0,
       toolbarHeight: 100,
       leadingWidth: 100,
-      toolbarTextStyle: GenewisaTextTheme.textTheme.bodyText1,
     );
   }
 }

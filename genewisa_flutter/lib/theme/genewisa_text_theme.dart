@@ -35,5 +35,16 @@ class GenewisaTextTheme {
       fontSize: 14,
       fontWeight: FontWeight.bold,
     ),
+    headline5: GoogleFonts.quicksand(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: Colors.red,
+    ),
+    headline6: GoogleFonts.quicksand(
+      fontSize: 20,
+    ),
+    labelMedium: GoogleFonts.quicksand(
+      fontSize: 18,
+    ),
   );
 }

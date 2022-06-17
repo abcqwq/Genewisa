@@ -16,7 +16,7 @@ class _SettingTextField extends State<SettingTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: TextFormField(
         style: GenewisaTextTheme.textTheme.bodyText1,
         controller: widget.textController,

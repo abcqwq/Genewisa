@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -23,8 +22,8 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       height: 300,
       decoration: GenewisaTheme.tileContainer(),
       child: Column(
@@ -40,7 +39,7 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
           Row(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 15),
+              margin: const EdgeInsets.only(right: 15),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(widget.url),
                 backgroundColor: Colors.transparent,
@@ -67,7 +66,7 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
           ),
           Container(
             alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 10),
             child: RichText(
               text:TextSpan(
                 style: GenewisaTextTheme.textTheme.bodyText1,

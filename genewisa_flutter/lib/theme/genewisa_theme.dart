@@ -19,7 +19,7 @@ class GenewisaTheme {
     );
   }
 
-  static BoxDecoration authButtonContainer() {
+  static BoxDecoration buttonContainer() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(20),
       gradient: const LinearGradient(

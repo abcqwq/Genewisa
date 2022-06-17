@@ -44,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
                           width: 228,
                           height: 53,
                           child: Container(
-                            decoration: GenewisaTheme.authButtonContainer(),
+                            decoration: GenewisaTheme.buttonContainer(),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {

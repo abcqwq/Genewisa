@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/theme/genewisa_text_theme.dart';
-import 'package:genewisa_flutter/theme/genewisa_theme.dart';
-import 'package:genewisa_flutter/view/widget/list_deskripsiwisata_container.dart';
-import 'package:genewisa_flutter/view/widget/list_review_container.dart';
-import 'package:genewisa_flutter/view/widget/list_wisata_container.dart';
+import '../theme/genewisa_text_theme.dart';
+import '../theme/genewisa_theme.dart';
+import '../view/widget/list_deskripsiwisata_container.dart';
+import '../view/widget/list_review_container.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DetailWisataView extends StatefulWidget {
   const DetailWisataView({Key? key}) : super(key: key);
@@ -19,7 +16,7 @@ class _DetailWisataView extends State<DetailWisataView> {
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map; 
-     final textController = TextEditingController();
+    final textController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,7 +28,7 @@ class _DetailWisataView extends State<DetailWisataView> {
         title: Row(
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             color: Colors.black,
             onPressed: () { Navigator.pop(context); },
           ),
@@ -77,7 +74,7 @@ class _DetailWisataView extends State<DetailWisataView> {
       body: SingleChildScrollView ( 
         child: Column(
           children: [
-            ListDeskripsiWisataContainer(tittle: "Deskripsi" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit."),
+            ListDeskripsiWisataContainer(title: "Deskripsi" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit."),
             ListReviewContainer(nama: "Aldo" , deskripsi: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit.", rating: 5, url: "https://images-ext-2.discordapp.net/external/ZayLKwlpb-DfZ8j9oobtSKa4Xv5rDU6-5k4NPZvMRfQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/432610292342587392/29cb28fbf65a3958105026ab03abd306.png?width=480&height=480"),
             SizedBox(height: 50),
           ],
@@ -153,11 +150,13 @@ class _DetailWisataView extends State<DetailWisataView> {
                         controller: textController,
                         keyboardType: TextInputType.multiline,
                         maxLines: 4,
+                        style: GenewisaTextTheme.textTheme.bodyText1,
                         decoration: InputDecoration( 
-                          hintText: "Masukan Deskripsi",
+                          hintText: "Masukkan Deskripsi",
+                          hintStyle: GenewisaTextTheme.textTheme.bodyText1,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide(width: 1, color: Color(0xFF9FACE6))
+                            borderSide: const BorderSide(width: 1, color: Color(0xFF9FACE6))
                           )
                         ),
                       ),
@@ -186,7 +185,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                         Container(
                           width: 100,
                           height: 53,
-                          decoration: GenewisaTheme.authButtonContainer(),
+                          decoration: GenewisaTheme.buttonContainer(),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -213,7 +212,7 @@ class _DetailWisataView extends State<DetailWisataView> {
           Container(
             width: 150,
             height: 53,
-            decoration: GenewisaTheme.authButtonContainer(),
+            decoration: GenewisaTheme.buttonContainer(),
             child: ElevatedButton(
               onPressed: () {
                 

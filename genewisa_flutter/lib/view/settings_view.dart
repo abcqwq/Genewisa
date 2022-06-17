@@ -1,19 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/theme/genewisa_text_theme.dart';
-import 'package:genewisa_flutter/theme/genewisa_theme.dart';
-import 'package:genewisa_flutter/view/widget/auth_text_field.dart';
-import 'package:genewisa_flutter/view/widget/setting_text_field.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/genewisa_text_theme.dart';
+import '../theme/genewisa_theme.dart';
+import '../view/widget/setting_text_field.dart';
 
-class SettingView extends StatefulWidget {
-  const SettingView({Key? key}) : super(key: key);
+class SettingsView extends StatefulWidget {
+  const SettingsView({Key? key}) : super(key: key);
 
   @override
-  State<SettingView> createState() => _SettingView();
+  State<SettingsView> createState() => _SettingsView();
 }
 
-class _SettingView extends State<SettingView> {
+class _SettingsView extends State<SettingsView> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -28,12 +25,12 @@ class _SettingView extends State<SettingView> {
         title: Row(
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             color: Colors.black,
             onPressed: () { Navigator.pop(context); },
           ),
           Text(
-            'Setting',
+            'Settings',
             style: GenewisaTextTheme.textTheme.headline2,
           ),
         ]
@@ -48,7 +45,7 @@ class _SettingView extends State<SettingView> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(bottom: 20),
+                  margin: const EdgeInsets.only(bottom: 20),
                   child: const CircleAvatar(
                     radius: 100,
                     backgroundColor: Colors.black,
@@ -66,7 +63,7 @@ class _SettingView extends State<SettingView> {
                       SettingTextField(hintText:"Username"),
                       SettingTextField(hintText:"Password Lama"),
                       SettingTextField(hintText:"Password Baru"),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -88,7 +85,7 @@ class _SettingView extends State<SettingView> {
                           Container(
                             width: 140,
                             height: 53,
-                            decoration: GenewisaTheme.authButtonContainer(),
+                            decoration: GenewisaTheme.buttonContainer(),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {

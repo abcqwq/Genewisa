@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:genewisa_flutter/theme/genewisa_text_theme.dart';
-import 'package:genewisa_flutter/view/saved_view.dart';
-import 'package:genewisa_flutter/view/tempatwisata_view.dart';
+import '../theme/genewisa_text_theme.dart';
+import '../view/saved_view.dart';
+import '../view/tempatwisata_view.dart';
 import '../view/profile_view.dart';
 import '../view/widget/home_app_bar.dart';
 
@@ -48,7 +47,7 @@ class _HomeCardMenuState extends State<HomeCardMenu> {
             ),
             Container(
               //alignment: Alignment.bottomLeft,
-              padding: EdgeInsets.only(left: 18, bottom: 15),
+              padding: const EdgeInsets.only(left: 18, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,

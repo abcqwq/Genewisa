@@ -43,7 +43,7 @@ class _SignUpViewState extends State<SignUpView> {
                         child: Container(
                           width: 228,
                           height: 53,
-                          decoration: GenewisaTheme.authButtonContainer(),
+                          decoration: GenewisaTheme.buttonContainer(),
                           child: ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {

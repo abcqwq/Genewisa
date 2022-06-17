@@ -4,11 +4,11 @@ import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
 
 class ListDeskripsiWisataContainer extends StatefulWidget {
-  final String tittle, deskripsi;
+  final String title, deskripsi;
 
   const ListDeskripsiWisataContainer({
     Key? key,
-    required this.tittle,
+    required this.title,
     required this.deskripsi,
   }) : super(key: key);
 
@@ -20,8 +20,8 @@ class _ListDeskripsiWisataContainerState extends State<ListDeskripsiWisataContai
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       height: 200,
       decoration: GenewisaTheme.tileContainer(),
       child: Column(
@@ -32,7 +32,7 @@ class _ListDeskripsiWisataContainerState extends State<ListDeskripsiWisataContai
               text:TextSpan(
                 style: GenewisaTextTheme.textTheme.headline2,
                 children: <TextSpan>[
-                  TextSpan(text: widget.tittle, style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: widget.title, style: const TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),

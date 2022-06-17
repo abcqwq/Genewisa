@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/view/widget/list_wisata_container.dart';
+import '../theme/genewisa_text_theme.dart';
+import '../view/widget/list_wisata_container.dart';
 
 class TempatWisataView extends StatefulWidget {
   const TempatWisataView({Key? key}) : super(key: key);
@@ -33,7 +33,8 @@ class _TempatWisataViewState extends State<TempatWisataView> {
     } else {
       results = _allWisata
           .where((wisata) =>
-              wisata["nama"].toLowerCase().contains(enteredKeyword.toLowerCase()) || wisata["lokasi"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+              wisata["nama"].toLowerCase().contains(enteredKeyword.toLowerCase()) 
+              || wisata["lokasi"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
 
@@ -54,12 +55,19 @@ class _TempatWisataViewState extends State<TempatWisataView> {
               height: 0,
             ),
             TextField(
+              style: GenewisaTextTheme.textTheme.bodyText1,
               onChanged: (value) => _runFilter(value),
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search, color: Colors.black,),
                 labelText: 'Search',
-                border: OutlineInputBorder(
+                labelStyle: GenewisaTextTheme.textTheme.bodyText1,
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(color: Colors.black),
                 ),
               ),
             ),
@@ -86,11 +94,9 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                         },
                       ),
                     )
-                  : const Text(
+                  : Text(
                       'Pencarian tidak ditemukan',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: GenewisaTextTheme.textTheme.labelMedium,
                     ),
             ),
           ],
