@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../theme/genewisa_text_theme.dart';
-import '../theme/genewisa_theme.dart';
+import '../../theme/genewisa_text_theme.dart';
+import '../../theme/genewisa_theme.dart';
 
 class ProfileView extends StatefulWidget {
   ProfileView({Key? key}) : super(key: key);

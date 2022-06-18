@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../view/widget/list_wisata_container.dart';
+import '../widget/list_wisata_container.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);

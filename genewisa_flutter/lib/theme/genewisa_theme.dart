@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class GenewisaTheme {
   static ThemeData geneTheme() {
-    return ThemeData(
-      primarySwatch: Colors.blue,
+    return ThemeData().copyWith(
+      colorScheme: ThemeData().colorScheme.copyWith(
+        primary: const Color(0xFF9FACE6),
+        secondary: const Color(0xFF74EBD5),
+      ),
     );
   }
 

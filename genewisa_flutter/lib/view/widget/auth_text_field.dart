@@ -35,10 +35,6 @@ class _AuthTextFieldState extends State<AuthTextField> {
             borderRadius: BorderRadius.circular(20),
             borderSide: const BorderSide(color: Colors.black),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(color: Color(0xFF9FACE6)),
-          ),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

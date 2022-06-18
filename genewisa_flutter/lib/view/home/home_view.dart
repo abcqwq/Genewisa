@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../theme/genewisa_text_theme.dart';
-import '../view/saved_view.dart';
-import '../view/tempatwisata_view.dart';
-import '../view/profile_view.dart';
-import '../view/widget/home_app_bar.dart';
+import '../../view/home/generate_view.dart';
+import '../../theme/genewisa_text_theme.dart';
+import 'saved_view.dart';
+import 'tempatwisata_view.dart';
+import 'profile_view.dart';
+import '../widget/home_app_bar.dart';
 
 class HomeCardMenu extends StatefulWidget {
   final String? sm_text;
@@ -144,10 +145,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
     ),
-    Text(
-      'Index 1: Generate',
-      style: optionStyle,
-    ),
+    GenerateView(),
     TempatWisataView(),
     SavedView(),
     ProfileView(),

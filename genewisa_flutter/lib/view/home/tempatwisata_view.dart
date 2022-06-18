@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/genewisa_text_theme.dart';
-import '../view/widget/list_wisata_container.dart';
+import '../../theme/genewisa_text_theme.dart';
+import '../widget/list_wisata_container.dart';
 
 class TempatWisataView extends StatefulWidget {
   const TempatWisataView({Key? key}) : super(key: key);
@@ -76,28 +76,28 @@ class _TempatWisataViewState extends State<TempatWisataView> {
             ),
             Expanded(
               child: _foundWisata.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: _foundWisata.length,
-                      itemBuilder: (context, index) => InkWell(
-                        child: ListWisataContainer(
-                          nama: _foundWisata[index]["nama"].toString(),
-                          lokasi: _foundWisata[index]["lokasi"].toString(),
-                          url: _foundWisata[index]["url"].toString(),
-                          rating: _foundWisata[index]["rating"],
-                        ),
-                        onTap: () {                          
-                          Navigator.pushNamed(
-                            context,
-                            '/detailwisata',
-                            arguments: _foundWisata[index],
-                          );
-                        },
+                ? ListView.builder(
+                    itemCount: _foundWisata.length,
+                    itemBuilder: (context, index) => InkWell(
+                      child: ListWisataContainer(
+                        nama: _foundWisata[index]["nama"].toString(),
+                        lokasi: _foundWisata[index]["lokasi"].toString(),
+                        url: _foundWisata[index]["url"].toString(),
+                        rating: _foundWisata[index]["rating"],
                       ),
-                    )
-                  : Text(
-                      'Pencarian tidak ditemukan',
-                      style: GenewisaTextTheme.textTheme.labelMedium,
+                      onTap: () {                          
+                        Navigator.pushNamed(
+                          context,
+                          '/detailwisata',
+                          arguments: _foundWisata[index],
+                        );
+                      },
                     ),
+                  )
+                : Text(
+                    'Pencarian tidak ditemukan',
+                    style: GenewisaTextTheme.textTheme.labelMedium,
+                  ),
             ),
           ],
         ),
