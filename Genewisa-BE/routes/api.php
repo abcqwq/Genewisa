@@ -7,6 +7,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TempatWisataController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminTokenController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +51,13 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/admin', [AdminTokenController::class, 'store']);
 Route::get('/admin', [AdminTokenController::class, 'findToken']);
 Route::delete('/admin', [AdminTokenController::class, 'delete']);
+
+// User Auth
+Route::post('/user-login', [UserAuthController::class, 'login']);
+Route::post('/user-logout', [UserAuthController::class, 'logout']);
+Route::post('/user-register', [UserAuthController::class, 'register']);
+
+// // User Token
+// Route::post('/user-access', [UserTokenController::class, 'store']);
+// Route::get('/user-access', [UserTokenController::class, 'findToken']);
+// Route::delete('/user-access', [UserTokenController::class, 'delete']);
