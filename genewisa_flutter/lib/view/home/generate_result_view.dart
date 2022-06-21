@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../theme/genewisa_text_theme.dart';
 import '../widget/list_wisata_container.dart';
+import 'detailwisata_view.dart';
 
 class GenerateResultView extends StatefulWidget {
   GenerateResultView({Key? key}) : super(key: key);
@@ -89,10 +90,16 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                           rating: _foundWisata[index]["rating"],
                         ),
                         onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/detailwisata',
-                            arguments: _foundWisata[index],
+                          // Navigator.pushNamed(
+                          //   context,
+                          //   '/detailwisata',
+                          //   arguments: _foundWisata[index],
+                          // );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailWisataView(foundWisata: _foundWisata[index])
+                              )
                           );
                         },
                       ),

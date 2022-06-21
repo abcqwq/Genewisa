@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../api/api.dart';
 import '../../theme/genewisa_text_theme.dart';
+import '../auth/login_view.dart';
+import '../home/home_view.dart';
+import '../home/settings_view.dart';
 
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   HomeAppBar({Key? key}) : preferredSize = const Size.fromHeight(80.0), super(key: key);
@@ -14,6 +21,19 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _HomeAppBarState extends State<HomeAppBar>{
 
+  _showMsg(msg, Color clr) { //
+    final snackBar = SnackBar(
+      backgroundColor: clr,
+      content: Text(msg, style: GenewisaTextTheme.textTheme.headline4),
+      action: SnackBarAction(
+        textColor: Colors.white,
+        label: 'Tutup',
+        onPressed: () {},
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -26,7 +46,13 @@ class _HomeAppBarState extends State<HomeAppBar>{
               semanticsLabel: 'Genewisa Icon',
             ),
             iconSize: 40,
-            onPressed: () { Navigator.pushNamed(context, '/'); },
+            onPressed: () {
+              //Navigator.pushNamed(context, '/');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeView())
+              );
+            },
           ),
           Text(
             'Genewisa',
@@ -47,9 +73,13 @@ class _HomeAppBarState extends State<HomeAppBar>{
           ),
           onSelected: (selected) {
             if (selected == 'Log Out') {
-              Navigator.pushNamed(context, '/login');
+              _logout();
             }else if(selected == 'Settings'){
-              Navigator.pushNamed(context, '/settings');
+              //Navigator.pushNamed(context, '/settings');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsView())
+              );
             }
           },
           itemBuilder: (_) => <PopupMenuEntry>[
@@ -70,5 +100,26 @@ class _HomeAppBarState extends State<HomeAppBar>{
       toolbarHeight: 100,
       leadingWidth: 100,
     );
+  }
+
+  void _logout() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var data = {
+      'token' : localStorage.getString('token'),
+    };
+
+    var res = await CallApi().postData(data, 'user-logout');
+    var body = json.decode(res.body);
+    if(body['status']=='OK'){
+      localStorage.remove('token');
+      print(body);
+      _showMsg("Berhasil log out", Colors.green);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginView())
+      );
+    }else{
+      print(body);
+    }
   }
 }

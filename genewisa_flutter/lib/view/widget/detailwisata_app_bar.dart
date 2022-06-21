@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import '../../theme/genewisa_text_theme.dart';
 
 class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DetailWisataAppBar({Key? key}) : preferredSize = const Size.fromHeight(250.0), super(key: key);
+  final Map<String, dynamic> foundWisata;
+
+  const DetailWisataAppBar({
+    Key? key,
+    required this.foundWisata
+  }) : preferredSize = const Size.fromHeight(250.0), super(key: key);
 
   @override
   final Size preferredSize;
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-      <String, dynamic>{}) as Map;
+    final arguments = foundWisata;
 
     return AppBar(
         backgroundColor: Colors.white,

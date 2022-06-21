@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/view/home/detailwisata_view.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../widget/list_wisata_container.dart';
 
@@ -86,10 +87,16 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                         rating: _foundWisata[index]["rating"],
                       ),
                       onTap: () {                          
-                        Navigator.pushNamed(
-                          context,
-                          '/detailwisata',
-                          arguments: _foundWisata[index],
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   '/detailwisata',
+                        //   arguments: _foundWisata[index],
+                        // );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailWisataView(foundWisata: _foundWisata[index])
+                            )
                         );
                       },
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../view/home/generate_view.dart';
 import '../../theme/genewisa_text_theme.dart';
 import 'saved_view.dart';
@@ -151,10 +152,13 @@ class _HomeViewState extends State<HomeView> {
     ProfileView(),
   ];
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    print(localStorage.get('token'));
+    print(localStorage.get('username'));
   }
 
   @override

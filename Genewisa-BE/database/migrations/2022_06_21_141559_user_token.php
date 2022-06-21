@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_token', function (Blueprint $table) {
             $table->string('token')->unique();
+            $table->string('username');
         });
     }
  

@@ -16,5 +16,5 @@ class UserToken extends Model
     protected $primaryKey = 'token';
     public $incrementing = false;
     
-    protected $fillable = ['token'];
+    protected $fillable = ['token', 'username'];
 }

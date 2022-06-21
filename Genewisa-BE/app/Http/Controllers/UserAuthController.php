@@ -17,7 +17,7 @@ class UserAuthController extends Controller
         if (!$user || ! Hash::check($request->password, $user->password)){
             return (new ResponseController)->toResponse(null, 400, ['Username atau password salah...']);
         }
-        return (new UserTokenController)->store();
+        return (new UserTokenController)->store($request);
         
     }
 

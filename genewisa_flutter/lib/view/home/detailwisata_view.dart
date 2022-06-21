@@ -7,7 +7,12 @@ import '../widget/list_review_container.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailWisataView extends StatefulWidget {
-  const DetailWisataView({Key? key}) : super(key: key);
+  final Map<String, dynamic> foundWisata;
+
+  const DetailWisataView({
+    Key? key,
+    required this.foundWisata
+  }) : super(key: key);
 
   @override
   State<DetailWisataView> createState() => _DetailWisataView();
@@ -16,12 +21,11 @@ class DetailWisataView extends StatefulWidget {
 class _DetailWisataView extends State<DetailWisataView> {
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
+    final arguments = widget.foundWisata;
     final textController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const DetailWisataAppBar(),
+      appBar: DetailWisataAppBar(foundWisata: arguments),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

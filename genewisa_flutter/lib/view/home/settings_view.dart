@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/view/home/home_view.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
 import '../widget/setting_text_field.dart';
@@ -93,7 +94,11 @@ class _SettingsView extends State<SettingsView> {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.pushNamed(context, '/');
+                                  //Navigator.pushNamed(context, '/');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => HomeView())
+                                  );
                                 }
                               },
                               style: GenewisaTheme.geneButton(),

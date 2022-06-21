@@ -3,10 +3,14 @@ import '../../theme/genewisa_text_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AuthTextField extends StatefulWidget {
-  AuthTextField({Key? key, required this.hintText}) : super(key: key);
+  AuthTextField({
+    Key? key,
+    required this.hintText,
+    required this.textController
+  }) : super(key: key);
 
   final String hintText;
-  final textController = TextEditingController();
+  final TextEditingController textController;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();

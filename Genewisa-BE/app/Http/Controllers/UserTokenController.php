@@ -28,9 +28,15 @@ class UserTokenController extends Controller
         return (new ResponseController)->toResponse(null, 404);
 
     }
-    public function store()
+    public function store(Request $request)
     { 
         $token = Str::random(64);
-        return (new ResponseController)->toResponse(UserToken::create(['token' => $token]), 200);
+
+        $values = array(
+            'token' => $token,
+            'username' => $request->username,
+        );
+
+        return (new ResponseController)->toResponse(UserToken::create($values), 200);
     }
 }
