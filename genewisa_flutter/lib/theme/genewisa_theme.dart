@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class GenewisaTheme {
   static ThemeData geneTheme() {
-    return ThemeData(
-      primarySwatch: Colors.blue,
+    return ThemeData().copyWith(
+      colorScheme: ThemeData().colorScheme.copyWith(
+        primary: const Color(0xFF9FACE6),
+        secondary: const Color(0xFF74EBD5),
+      ),
     );
   }
 
@@ -19,7 +22,7 @@ class GenewisaTheme {
     );
   }
 
-  static BoxDecoration authButtonContainer() {
+  static BoxDecoration buttonContainer() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(20),
       gradient: const LinearGradient(
@@ -31,13 +34,26 @@ class GenewisaTheme {
     );
   }
 
-  static BoxDecoration authContainer() {
+  static BoxDecoration cancelButtonContainer() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      gradient: const LinearGradient(
+        colors: <Color>[
+          Color(0xFFFF3434),
+          Color(0xFF848AA5),
+        ]
+      )
+    );
+  }
+
+  static BoxDecoration tileContainer({color = Colors.transparent}) {
     return BoxDecoration(
       border: Border.all(
         color: Colors.black,
         width: 1,
       ),
-      borderRadius: const BorderRadius.all(Radius.circular(40)),
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      color: color,
     );
   }
 }

@@ -3,8 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class GenewisaTextTheme {
   static TextTheme textTheme = TextTheme(
+    headlineLarge: GoogleFonts.quicksand(
+      fontSize: 64,
+      color: Colors.black,
+    ),
     headline1: GoogleFonts.quicksand(
       fontSize: 46,
+      color: Colors.black,
+    ),
+    headline2: GoogleFonts.quicksand(
+      fontSize: 24,
       color: Colors.black,
     ),
     bodyText1: GoogleFonts.quicksand(
@@ -19,6 +27,24 @@ class GenewisaTextTheme {
     button: GoogleFonts.quicksand(
       fontSize: 14,
       color: Colors.white,
-    )
+    ),
+    headline3: GoogleFonts.quicksand(
+      fontSize: 24,
+    ),
+    headline4: GoogleFonts.quicksand(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
+    headline5: GoogleFonts.quicksand(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: Colors.red,
+    ),
+    headline6: GoogleFonts.quicksand(
+      fontSize: 20,
+    ),
+    labelMedium: GoogleFonts.quicksand(
+      fontSize: 18,
+    ),
   );
 }

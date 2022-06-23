@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Controllers\ResponseController;
 use App\Models\AdminToken;
+use App\Models\UserToken;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        $tokenFromDB = AdminToken::find($request->token);
+        $tokenAdminFromDB = AdminToken::find($request->token);
+        $tokenUserFromDB = UserToken::find($request->token);
 
-        if (!isset($tokenFromDB)) {
+        if (!isset($tokenAdminFromDB) && !isset($tokenUserFromDB)) {
             return (new ResponseController)->toResponse(null, 400, ['Unauthenticated']);
         }
 
