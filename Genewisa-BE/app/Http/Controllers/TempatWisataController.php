@@ -17,9 +17,16 @@ class TempatWisataController extends Controller
 
     public function index(Request $request) {
         if (!isset($request->key)) {
+            if(!isset($request->page)){
+                return (new ResponseController)->toResponse(TempatWisata::all(), 200);
+            }
             return (new ResponseController)->toResponse(TempatWisata::paginate(10), 200);
         }
-        return $this::searchByKeyword($request->key);
+        if(!isset($request->page)){
+            return $this::searchByKeywordAll($request->key);
+        } else{
+            return $this::searchByKeyword($request->key);
+        }
     }
 
 
@@ -118,6 +125,11 @@ class TempatWisataController extends Controller
 
     private static function searchByKeyword($key) {
         $tempatWisata = TempatWisata::where('name', 'LIKE', '%'.$key.'%')->orWhere('city', 'LIKE', '%'.$key.'%')->paginate(10);
+        return (new ResponseController)->toResponse($tempatWisata, 200);
+    }
+
+    private static function searchByKeywordAll($key) {
+        $tempatWisata = TempatWisata::where('name', 'LIKE', '%'.$key.'%')->orWhere('city', 'LIKE', '%'.$key.'%')->get();
         return (new ResponseController)->toResponse($tempatWisata, 200);
     }
 }

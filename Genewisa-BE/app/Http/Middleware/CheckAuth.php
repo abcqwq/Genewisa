@@ -22,7 +22,7 @@ class CheckAuth
         $tokenAdminFromDB = AdminToken::find($request->token);
         $tokenUserFromDB = UserToken::find($request->token);
 
-        if (!isset($tokenAdminFromDB) || !isset($tokenUserFromDB)) {
+        if (!isset($tokenAdminFromDB) && !isset($tokenUserFromDB)) {
             return (new ResponseController)->toResponse(null, 400, ['Unauthenticated']);
         }
 
