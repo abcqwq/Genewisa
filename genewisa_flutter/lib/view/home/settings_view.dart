@@ -200,8 +200,6 @@ class _SettingsView extends State<SettingsView> {
 
     var res = await CallApi().putData(data, 'user/' + (localStorage.getString('username') ?? ''));
     var body = json.decode(res.body);
-    print("a");
-    print(body);
     if (body['status'] == 'OK') {
       localStorage.setString('username', body['data']['username']);
       _showMsg("Berhasil memperbaharui", Colors.green);
