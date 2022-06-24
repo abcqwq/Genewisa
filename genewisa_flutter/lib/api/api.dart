@@ -22,6 +22,15 @@ class CallApi{
     );
   }
 
+  putData(data, apiUrl) async {
+    var fullUrl = _url + apiUrl + await _getToken();
+    return await http.put(
+        Uri.parse(fullUrl),
+        body: jsonEncode(data),
+        headers: _setHeaders()
+    );
+  }
+
   _setHeaders() => {
     'Content-type' : 'application/json',
     'Accept' : 'application/json',

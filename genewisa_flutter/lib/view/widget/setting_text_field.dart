@@ -4,12 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SettingTextField extends StatefulWidget {
   SettingTextField(
-      {Key? key, required this.hintText, required this.initialValue})
+      {Key? key, required this.hintText, required this.textController})
       : super(key: key);
 
   final String hintText;
-  final String initialValue;
-  final textController = TextEditingController();
+  final TextEditingController textController;
 
   @override
   State<SettingTextField> createState() => _SettingTextField();
@@ -22,7 +21,7 @@ class _SettingTextField extends State<SettingTextField> {
       margin: const EdgeInsets.all(10),
       child: TextFormField(
         style: GenewisaTextTheme.textTheme.bodyText1,
-        controller: TextEditingController(text: widget.initialValue),
+        controller: widget.textController,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 30),
           labelText: widget.hintText,
