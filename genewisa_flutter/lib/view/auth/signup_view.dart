@@ -144,7 +144,6 @@ class _SignUpViewState extends State<SignUpView> {
     var res = await CallApi().postData(data, 'user-register');
     var body = json.decode(res.body);
     if(body['status']=='OK'){
-      print(body);
       _showMsg("Berhasil membuat akun", Colors.green);
       Navigator.push(
           context,

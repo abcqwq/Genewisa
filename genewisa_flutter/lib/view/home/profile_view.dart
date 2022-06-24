@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/api.dart';
+import '../../model/user_model.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
 
@@ -16,15 +17,6 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   String? username, firstName, lastName;
-  Future<void> setUser() async {
-    getUser();
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    setState(() {
-      username = localStorage.getString('username');
-      firstName = localStorage.getString('first_name');
-      lastName = localStorage.getString('last_name');
-    });
-  }
 
   void getUser() async{
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -35,21 +27,19 @@ class _ProfileViewState extends State<ProfileView> {
 
     var res = await CallApi().getData(data, 'user/'+(data['username'] ?? ''));
     var body = json.decode(res.body);
-    if(body['status']=='OK'){
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('first_name', body['data']['first_name']);
-      localStorage.setString('last_name', body['data']['last_name']);
-      print(body);
-    }
+    localStorage.setString('first_name', body['data']['first_name']);
+    localStorage.setString('last_name', body['data']['last_name']);
 
-    // setState(() {
-    //   _isLoading = false;
-    // });
+    setState(() {
+      username = localStorage.getString('username');
+      firstName = localStorage.getString('first_name');
+      lastName = localStorage.getString('last_name');
+    });
   }
 
   @override
   void initState() {
-    setUser();
+    getUser();
   }
 
   @override
