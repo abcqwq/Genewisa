@@ -38,20 +38,12 @@ class UserAuthController extends Controller
             "https://i.imgur.com/b6gPRRu.png", 
             "https://i.imgur.com/T0lr23r.png"
         );
-        $b = rand(1,10);
+        $b = rand(1,100);
         if ($b <= 2){
             $image = "https://i.imgur.com/BpWouf3.png";
         }else{
             $image = $images[array_rand($images,1)];
         }
-
-        $values = array(
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'img' => $image
-        );
 
         $values = array(
             'username' => $request->username,

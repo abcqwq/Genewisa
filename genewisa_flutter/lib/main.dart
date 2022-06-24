@@ -7,8 +7,14 @@ import '../theme/genewisa_theme.dart';
 import '../view/auth/signup_view.dart';
 import '../view/auth/login_view.dart';
 import 'view/home/home_view.dart';
+import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
 
-void main() => runApp(const GenewisaApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PreferenceGlobal.init();
+
+  runApp(const GenewisaApp());
+}
 
 class GenewisaApp extends StatefulWidget {
   const GenewisaApp({Key? key}) : super(key: key);
@@ -26,11 +32,11 @@ class _GenewisaAppState extends State<GenewisaApp> {
     super.initState();
   }
 
-  Future<bool> _checkIfLoggedIn() async{
+  Future<bool> _checkIfLoggedIn() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.get('token');
     print(token);
-    _isLoggedIn = token!=null;
+    _isLoggedIn = token != null;
 
     return _isLoggedIn;
   }
