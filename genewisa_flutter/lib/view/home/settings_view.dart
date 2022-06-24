@@ -64,52 +64,11 @@ class _SettingsView extends State<SettingsView> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      SettingTextField(hintText: "Nama lengkap"),
-                      SettingTextField(hintText: "Username"),
-                      SettingTextField(hintText: "Password Lama"),
-                      SettingTextField(hintText: "Password Baru"),
+                      SettingTextField(hintText: "Nama lengkap", initialValue: "a"),
+                      SettingTextField(hintText: "Username", initialValue: ""),
+                      SettingTextField(hintText: "Password Lama", initialValue: ""),
+                      SettingTextField(hintText: "Password Baru", initialValue: ""),
                       const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 140,
-                            height: 53,
-                            decoration: GenewisaTheme.cancelButtonContainer(),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              style: GenewisaTheme.geneButton(),
-                              child: Text(
-                                'Batal',
-                                style: GenewisaTextTheme.textTheme.button,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 140,
-                            height: 53,
-                            decoration: GenewisaTheme.buttonContainer(),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  //Navigator.pushNamed(context, '/');
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => HomeView())
-                                  );
-                                }
-                              },
-                              style: GenewisaTheme.geneButton(),
-                              child: Text(
-                                'Simpan',
-                                style: GenewisaTextTheme.textTheme.button,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -117,6 +76,47 @@ class _SettingsView extends State<SettingsView> {
             ),
           ),
         ),
+      ),
+      bottomSheet: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: 140,
+            height: 53,
+            decoration: GenewisaTheme.cancelButtonContainer(),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: GenewisaTheme.geneButton(),
+              child: Text(
+                'Batal',
+                style: GenewisaTextTheme.textTheme.button,
+              ),
+            ),
+          ),
+          Container(
+            width: 140,
+            height: 53,
+            decoration: GenewisaTheme.buttonContainer(),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  //Navigator.pushNamed(context, '/');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeView())
+                  );
+                }
+              },
+              style: GenewisaTheme.geneButton(),
+              child: Text(
+                'Simpan',
+                style: GenewisaTextTheme.textTheme.button,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

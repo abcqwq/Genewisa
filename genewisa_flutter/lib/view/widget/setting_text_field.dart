@@ -3,9 +3,12 @@ import '../../theme/genewisa_text_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingTextField extends StatefulWidget {
-  SettingTextField({Key? key, required this.hintText}) : super(key: key);
+  SettingTextField(
+      {Key? key, required this.hintText, required this.initialValue})
+      : super(key: key);
 
   final String hintText;
+  final String initialValue;
   final textController = TextEditingController();
 
   @override
@@ -19,7 +22,7 @@ class _SettingTextField extends State<SettingTextField> {
       margin: const EdgeInsets.all(10),
       child: TextFormField(
         style: GenewisaTextTheme.textTheme.bodyText1,
-        controller: widget.textController,
+        controller: TextEditingController(text: widget.initialValue),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 30),
           labelText: widget.hintText,
@@ -44,10 +47,10 @@ class _SettingTextField extends State<SettingTextField> {
           }
           return null;
         },
-        obscureText: 
-          widget.hintText == 'Password Lama' || widget.hintText == 'Password Baru'
-          ? true 
-          : false,
+        obscureText: widget.hintText == 'Password Lama' ||
+                widget.hintText == 'Password Baru'
+            ? true
+            : false,
       ),
     );
   }
