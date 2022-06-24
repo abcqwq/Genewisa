@@ -53,9 +53,9 @@ class _SettingsView extends State<SettingsView> {
       firstName = localStorage.getString('first_name');
       lastName = localStorage.getString('last_name');
     });
-    TextEditingController namaController =
+    namaController =
         TextEditingController(text: '$firstName $lastName');
-    TextEditingController usernameController =
+    usernameController =
         TextEditingController(text: username);
   }
 
