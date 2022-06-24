@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../api/api.dart';
 import '../../theme/genewisa_theme.dart';
+import '../../utils/PreferenceGlobal.dart';
 import '../widget/setting_text_field.dart';
 
 class SettingsView extends StatefulWidget {
@@ -16,7 +17,7 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsView extends State<SettingsView> {
   final _formKey = GlobalKey<FormState>();
-  String? username, firstName, lastName;
+  String? username, firstName, lastName, img;
   TextEditingController namaController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordlamaController = TextEditingController();
@@ -37,21 +38,22 @@ class _SettingsView extends State<SettingsView> {
   }
 
   void getUser() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
     var data = {
-      'token': localStorage.getString('token'),
-      'username': localStorage.getString('username')
+      'token': PreferenceGlobal.getPref().getString('token'),
+      'username': PreferenceGlobal.getPref().getString('username')
     };
 
     var res = await CallApi().getData(data, 'user/' + (data['username'] ?? ''));
     var body = json.decode(res.body);
-    localStorage.setString('first_name', body['data']['first_name']);
-    localStorage.setString('last_name', body['data']['last_name']);
+    await PreferenceGlobal.getPref().setString('first_name', body['data']['first_name'] ?? "");
+    await PreferenceGlobal.getPref().setString('last_name', body['data']['last_name'] ?? "");
+    await PreferenceGlobal.getPref().setString('img', body['data']['img'] ?? "");
 
     setState(() {
-      username = localStorage.getString('username');
-      firstName = localStorage.getString('first_name');
-      lastName = localStorage.getString('last_name');
+      username = PreferenceGlobal.getPref().getString('username');
+      firstName = PreferenceGlobal.getPref().getString('first_name');
+      lastName = PreferenceGlobal.getPref().getString('last_name');
+      img = PreferenceGlobal.getPref().getString('img');
     });
     namaController =
         TextEditingController(text: '$firstName $lastName');
@@ -103,12 +105,11 @@ class _SettingsView extends State<SettingsView> {
                 Container(
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(bottom: 20),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: 100,
                     backgroundColor: Colors.black,
-                    child: const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://images-ext-1.discordapp.net/external/8cWjK0gRjXAALR4npR2qYFVscpnJEkFoyWBAVQszngQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/707445135318974515/93ac9643a293a7ae11b3375beb63fc44.png?width=480&height=480"),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(img ?? ''),
                       radius: 98,
                     ),
                   ),
