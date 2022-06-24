@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../model/tempatwisata_model.dart';
 import '../../view/widget/detailwisata_app_bar.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -7,7 +8,7 @@ import '../widget/list_review_container.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailWisataView extends StatefulWidget {
-  final Map<String, dynamic> foundWisata;
+  final TempatWisata foundWisata;
 
   const DetailWisataView({
     Key? key,
@@ -29,10 +30,13 @@ class _DetailWisataView extends State<DetailWisataView> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            ListDeskripsiWisataContainer(
-                title: "Deskripsi",
-                deskripsi:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit."),
+            SingleChildScrollView(
+              clipBehavior: Clip.antiAlias,
+              child: ListDeskripsiWisataContainer(
+                  title: "Deskripsi",
+                  deskripsi: widget.foundWisata.description,
+              ),
+            ),
             ListReviewContainer(
                 nama: "Aldo",
                 deskripsi:
@@ -64,14 +68,14 @@ class _DetailWisataView extends State<DetailWisataView> {
                             style: GenewisaTextTheme.textTheme.headline1,
                             children: <TextSpan>[
                               TextSpan(
-                                text: arguments['nama'],
+                                text: arguments.name,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                         ),
                         Text(
-                          arguments['lokasi'],
+                          arguments.city,
                           style: GenewisaTextTheme.textTheme.bodyText1,
                         ),
                         Container(

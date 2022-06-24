@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/model/tempatwisata_model.dart';
 import '../../theme/genewisa_text_theme.dart';
 
 class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Map<String, dynamic> foundWisata;
+  final TempatWisata foundWisata;
 
   const DetailWisataAppBar({
     Key? key,
@@ -28,7 +29,7 @@ class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget 
               height: 249,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(arguments['url']),
+                  image: NetworkImage(arguments.pictureUrl),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -57,14 +58,14 @@ class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget 
                       style: GenewisaTextTheme.textTheme.headline1,
                       children: <TextSpan>[
                         TextSpan(
-                            text: arguments['nama'],
+                            text: arguments.name,
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
                   Text(
-                    arguments['lokasi'],
+                    arguments.city,
                     style: GenewisaTextTheme.textTheme.bodyText1,
                   ),
                   RichText(
@@ -74,7 +75,7 @@ class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget 
                         const TextSpan(
                             text: "Rating : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: arguments['rating'].toString()),
+                        TextSpan(text: arguments.rating.toString()),
                       ],
                     ),
                   ),

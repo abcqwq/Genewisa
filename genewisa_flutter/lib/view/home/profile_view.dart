@@ -24,7 +24,7 @@ class _ProfileViewState extends State<ProfileView> {
       'username': PreferenceGlobal.getPref().getString('username')
     };
 
-    var res = await CallApi().getData(data, 'user/' + (data['username'] ?? ''));
+    var res = await CallApi().getData('user/' + (data['username'] ?? ''));
     var body = json.decode(res.body);
     if (body['status'] == 'OK') {
       await PreferenceGlobal.getPref()
@@ -116,23 +116,6 @@ class _ProfileViewState extends State<ProfileView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            '7',
-                            style: GenewisaTextTheme.textTheme.headlineLarge,
-                          ),
-                          Text(
-                            'Dikunjungi',
-                            style: GenewisaTextTheme.textTheme.bodyText1,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
