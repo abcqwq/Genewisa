@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('city')->nullable(false);
+            $table->string('pictureUrl')->nullable(false);
+            $table->double('rating')->nullable(false)->default(0);
             $table->text('description');
         });
     }
