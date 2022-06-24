@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
@@ -143,6 +142,7 @@ class _LoginViewState extends State<LoginView> {
       await PreferenceGlobal.getPref()
           .setString('username', body['data']['username']);
       _showMsg("Berhasil login", Colors.green);
+      print(body);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeView()));
     } else {
