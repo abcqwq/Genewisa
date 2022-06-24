@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/api.dart';
 import '../../model/user_model.dart';
@@ -16,30 +17,34 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  String? username, firstName, lastName;
-
-  void getUser() async{
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
+  String? username, firstName, lastName, img;
+  void _getUser() async {
     var data = {
-      'token' : localStorage.getString('token'),
-      'username' : localStorage.getString('username')
+      'token': PreferenceGlobal.getPref().getString('token'),
+      'username': PreferenceGlobal.getPref().getString('username')
     };
 
-    var res = await CallApi().getData(data, 'user/'+(data['username'] ?? ''));
+    var res = await CallApi().getData(data, 'user/' + (data['username'] ?? ''));
     var body = json.decode(res.body);
-    localStorage.setString('first_name', body['data']['first_name']);
-    localStorage.setString('last_name', body['data']['last_name']);
-
-    setState(() {
-      username = localStorage.getString('username');
-      firstName = localStorage.getString('first_name');
-      lastName = localStorage.getString('last_name');
-    });
+    if (body['status'] == 'OK') {
+      await PreferenceGlobal.getPref()
+          .setString('first_name', body['data']['first_name'] ?? "");
+      await PreferenceGlobal.getPref()
+          .setString('last_name', body['data']['last_name'] ?? "");
+      await PreferenceGlobal.getPref()
+          .setString('img', body['data']['img'] ?? "");
+      setState(() {
+        username = PreferenceGlobal.getPref().getString('username');
+        firstName = PreferenceGlobal.getPref().getString('first_name');
+        lastName = PreferenceGlobal.getPref().getString('last_name');
+        img = PreferenceGlobal.getPref().getString('img');
+      });
+    }
   }
 
   @override
   void initState() {
-    getUser();
+    _getUser();
   }
 
   @override
@@ -53,17 +58,20 @@ class _ProfileViewState extends State<ProfileView> {
           children: <Widget>[
             Container(
               height: 168,
-              margin: const EdgeInsets.only(top: 20, bottom: 15, left: 30, right: 30),
-              decoration: GenewisaTheme.tileContainer(color: const Color(0xFFFFEE57)),
+              margin: const EdgeInsets.only(
+                  top: 20, bottom: 15, left: 30, right: 30),
+              decoration:
+                  GenewisaTheme.tileContainer(color: const Color(0xFFFFEE57)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 52,
                     backgroundColor: Colors.black,
-                    child: const CircleAvatar(
-                      backgroundImage: NetworkImage("https://images-ext-1.discordapp.net/external/8cWjK0gRjXAALR4npR2qYFVscpnJEkFoyWBAVQszngQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/707445135318974515/93ac9643a293a7ae11b3375beb63fc44.png?width=480&height=480"),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(img ??
+                          "https://med.gov.bz/wp-content/uploads/2020/08/dummy-profile-pic-300x300.jpg"),
                       radius: 50,
                     ),
                   ),
@@ -71,9 +79,18 @@ class _ProfileViewState extends State<ProfileView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(firstName ?? '', style: GenewisaTextTheme.textTheme.headline2,),
-                      Text(lastName ?? '', style: GenewisaTextTheme.textTheme.headline2,),
-                      Text(username ?? '', style: GenewisaTextTheme.textTheme.bodyText1,),
+                      Text(
+                        firstName ?? '',
+                        style: GenewisaTextTheme.textTheme.headline2,
+                      ),
+                      Text(
+                        lastName ?? '',
+                        style: GenewisaTextTheme.textTheme.headline2,
+                      ),
+                      Text(
+                        username ?? '',
+                        style: GenewisaTextTheme.textTheme.bodyText1,
+                      ),
                     ],
                   )
                 ],
@@ -103,17 +120,31 @@ class _ProfileViewState extends State<ProfileView> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('7', style: GenewisaTextTheme.textTheme.headlineLarge,),
-                          Text('Dikunjungi', style: GenewisaTextTheme.textTheme.bodyText1,),
+                          Text(
+                            '7',
+                            style: GenewisaTextTheme.textTheme.headlineLarge,
+                          ),
+                          Text(
+                            'Dikunjungi',
+                            style: GenewisaTextTheme.textTheme.bodyText1,
+                          ),
                         ],
                       ),
-                      const SizedBox(width: 50,),
+                      const SizedBox(
+                        width: 50,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('5', style: GenewisaTextTheme.textTheme.headlineLarge,),
-                          Text('Review', style: GenewisaTextTheme.textTheme.bodyText1,),
+                          Text(
+                            '5',
+                            style: GenewisaTextTheme.textTheme.headlineLarge,
+                          ),
+                          Text(
+                            'Review',
+                            style: GenewisaTextTheme.textTheme.bodyText1,
+                          ),
                         ],
                       )
                     ],
