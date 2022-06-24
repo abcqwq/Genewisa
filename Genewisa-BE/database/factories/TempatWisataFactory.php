@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TempatWisata;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,14 @@ class TempatWisataFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => $this->faker->words(rand(1,3), true),
-            'city' => $this->faker->city(),
-            'description' => $this->faker->paragraph(rand(3,9)),
-        ];
+
+        
+    
+
+
+        return [];
+            // 'name' => $this->faker->words(rand(1,3), true),
+            // 'city' => $this->faker->city(),
+            // 'description' => $this->faker->paragraph(rand(3,9)),
     }
 }
