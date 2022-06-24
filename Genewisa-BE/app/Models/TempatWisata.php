@@ -13,5 +13,5 @@ class TempatWisata extends Model
     
     protected $table = "tempatwisata";
 
-    protected $fillable = ['name', 'city', 'pictureUrl', 'rating', 'description'];
+    protected $fillable = ['name', 'city', 'pictureUrl', 'price' , 'rating', 'description'];
 }
