@@ -138,6 +138,9 @@ class UserController extends Controller
 
         $user = User::find($username);
 
+        if (! Hash::check($request->passwordlama, $user->password)){
+            return (new ResponseController)->toResponse(null, 400, ['password salah...']);
+        }
         if (!isset($user)) {
             return (new ResponseController)->toResponse($user, 404, ["User dengan username " . $username . " tidak dapat ditemukan..."]);
         }
@@ -153,6 +156,9 @@ class UserController extends Controller
             $user->first_name = $request->first_name;
         }
         $user->last_name = $request->last_name;
+        if (isset($request->passwordbaru)) {
+            $user->password = Hash::make($request->passwordbaru);
+        }
         $user->save();
         return (new ResponseController)->toResponse($user, 200);
     }

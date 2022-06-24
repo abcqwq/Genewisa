@@ -24,7 +24,7 @@ class _ProfileViewState extends State<ProfileView> {
       'username': PreferenceGlobal.getPref().getString('username')
     };
 
-    var res = await CallApi().getData(data, 'user/' + (data['username'] ?? ''));
+    var res = await CallApi().getData('user/' + (data['username'] ?? ''));
     var body = json.decode(res.body);
     if (body['status'] == 'OK') {
       await PreferenceGlobal.getPref()

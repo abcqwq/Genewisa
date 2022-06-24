@@ -57,6 +57,8 @@ class TempatWisataController extends Controller
         $values = array (
             'name' => $request->name,
             'city' => $request->city,
+            'price' => $request->price,
+            'pictureUrl' => $request->pictureUrl,
             'description' => $request->description
         );
         $rules = [

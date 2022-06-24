@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TempatWisataController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminTokenController;
+use App\Http\Controllers\SavedController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserTokenController;
 
@@ -56,6 +57,12 @@ Route::delete('/admin', [AdminTokenController::class, 'delete']);
 Route::post('/user-login', [UserAuthController::class, 'login']);
 Route::post('/user-logout', [UserAuthController::class, 'logout']);
 Route::post('/user-register', [UserAuthController::class, 'register']);
+
+// Saved
+Route::get('/saved', [SavedController::class, 'index']);
+Route::get('/saved/{id}', [SavedController::class, 'index'])->middleware('auth');
+Route::post('/saved', [SavedController::class, 'store'])->middleware('auth');
+Route::delete('/saved', [SavedController::class, 'delete'])->middleware('auth');
 
 // // User Token
 // Route::post('/user-access', [UserTokenController::class, 'store']);

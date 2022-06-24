@@ -3,10 +3,12 @@ import '../../theme/genewisa_text_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingTextField extends StatefulWidget {
-  SettingTextField({Key? key, required this.hintText}) : super(key: key);
+  SettingTextField(
+      {Key? key, required this.hintText, required this.textController})
+      : super(key: key);
 
   final String hintText;
-  final textController = TextEditingController();
+  final TextEditingController textController;
 
   @override
   State<SettingTextField> createState() => _SettingTextField();
@@ -44,10 +46,10 @@ class _SettingTextField extends State<SettingTextField> {
           }
           return null;
         },
-        obscureText: 
-          widget.hintText == 'Password Lama' || widget.hintText == 'Password Baru'
-          ? true 
-          : false,
+        obscureText: widget.hintText == 'Password Lama' ||
+                widget.hintText == 'Password Baru'
+            ? true
+            : false,
       ),
     );
   }
