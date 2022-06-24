@@ -147,7 +147,6 @@ class _SignUpViewState extends State<SignUpView> {
       'first_name': firstName,
       'last_name': lastName
     };
-    print("abcdefgh");
     var res = await CallApi().postData(data, 'user-register');
     var body = json.decode(res.body);
     print(body);

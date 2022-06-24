@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/api/api.dart';
 import '../../../model/tempatwisata_model.dart';
+import '../../utils/PreferenceGlobal.dart';
 import '../../view/widget/detailwisata_app_bar.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -10,16 +14,51 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class DetailWisataView extends StatefulWidget {
   final TempatWisata foundWisata;
 
-  const DetailWisataView({
-    Key? key,
-    required this.foundWisata
-  }) : super(key: key);
+  const DetailWisataView({Key? key, required this.foundWisata})
+      : super(key: key);
 
   @override
   State<DetailWisataView> createState() => _DetailWisataView();
 }
 
 class _DetailWisataView extends State<DetailWisataView> {
+  bool _isSaved = false;
+  String? username;
+  _showMsg(msg, Color clr) {
+    //
+    final snackBar = SnackBar(
+      backgroundColor: clr,
+      content: Text(msg, style: GenewisaTextTheme.textTheme.headline4),
+      action: SnackBarAction(
+        textColor: Colors.white,
+        label: 'Tutup',
+        onPressed: () {},
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _getIsaved() async {
+    username = PreferenceGlobal.getPref().getString('username');
+    var res = await CallApi().getData('saved?username=' +
+        (username ?? '') +
+        '&id_tempatwisata=' +
+        (widget.foundWisata.id.toString()));
+    var body = json.decode(res.body);
+    setState(() {
+      if (body['data'].length == 0) {
+        _isSaved = false;
+      } else {
+        _isSaved = true;
+      }
+    });
+  }
+
+  @override
+  initState() {
+    _getIsaved();
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments = widget.foundWisata;
@@ -33,8 +72,8 @@ class _DetailWisataView extends State<DetailWisataView> {
             SingleChildScrollView(
               clipBehavior: Clip.antiAlias,
               child: ListDeskripsiWisataContainer(
-                  title: "Deskripsi",
-                  deskripsi: widget.foundWisata.description,
+                title: "Deskripsi",
+                deskripsi: widget.foundWisata.description,
               ),
             ),
             ListReviewContainer(
@@ -190,10 +229,12 @@ class _DetailWisataView extends State<DetailWisataView> {
             height: 53,
             decoration: GenewisaTheme.buttonContainer(),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _save(widget.foundWisata.id);
+              },
               style: GenewisaTheme.geneButton(),
               child: Text(
-                'Simpan',
+                _isSaved ? 'Tersimpan' : 'Simpan',
                 style: GenewisaTextTheme.textTheme.button,
               ),
             ),
@@ -201,5 +242,22 @@ class _DetailWisataView extends State<DetailWisataView> {
         ],
       ),
     );
+  }
+
+  void _save(id) async {
+    var data = {
+      'username': PreferenceGlobal.getPref().getString('username'),
+      'id_tempatwisata': id,
+    };
+    if (!_isSaved) {
+      var res = await CallApi().postData(data, 'saved/');
+      var body = json.decode(res.body);
+    } else if (_isSaved) {
+      var res = await CallApi().deleteData(data, 'saved/');
+      var body = json.decode(res.body);
+    }
+    setState(() {
+      _isSaved = !_isSaved;
+    });
   }
 }

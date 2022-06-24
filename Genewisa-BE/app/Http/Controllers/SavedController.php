@@ -18,6 +18,9 @@ class SavedController extends Controller
      */
     public function index(Request $request)
     {
+        if (isset($request->username) && isset($request->id_tempatwisata)){
+            return $this::searchByUsernameandIdtempat($request->username, $request->id_tempatwisata);
+        }
         if (isset($request->username)) {
             return $this::searchByUsername($request->username);
         }
@@ -106,6 +109,10 @@ class SavedController extends Controller
 
     private static function searchByUsername($username) {
         $saved = Saved::where('username', '=', ''.$username.'')->get();
+        return (new ResponseController)->toResponse($saved, 200);
+    }
+    private static function searchByUsernameandIdtempat($username, $id_tempatwisata) {
+        $saved = Saved::where('username', '=', ''.$username.'')->where('id_tempatwisata','=', ''.$id_tempatwisata.'')->get();
         return (new ResponseController)->toResponse($saved, 200);
     }
 }

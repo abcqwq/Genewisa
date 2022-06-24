@@ -43,7 +43,7 @@ class _SettingsView extends State<SettingsView> {
       'username': PreferenceGlobal.getPref().getString('username')
     };
 
-    var res = await CallApi().getData(data, 'user/' + (data['username'] ?? ''));
+    var res = await CallApi().getData('user/' + (data['username'] ?? ''));
     var body = json.decode(res.body);
     await PreferenceGlobal.getPref().setString('first_name', body['data']['first_name'] ?? "");
     await PreferenceGlobal.getPref().setString('last_name', body['data']['last_name'] ?? "");

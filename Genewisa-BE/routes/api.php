@@ -58,11 +58,11 @@ Route::post('/user-login', [UserAuthController::class, 'login']);
 Route::post('/user-logout', [UserAuthController::class, 'logout']);
 Route::post('/user-register', [UserAuthController::class, 'register']);
 
-// User Auth
+// Saved
 Route::get('/saved', [SavedController::class, 'index']);
-Route::get('/saved/{id}', [SavedController::class, 'index']);
-Route::post('/saved', [SavedController::class, 'store']);
-Route::delete('/saved', [SavedController::class, 'delete']);
+Route::get('/saved/{id}', [SavedController::class, 'index'])->middleware('auth');
+Route::post('/saved', [SavedController::class, 'store'])->middleware('auth');
+Route::delete('/saved', [SavedController::class, 'delete'])->middleware('auth');
 
 // // User Token
 // Route::post('/user-access', [UserTokenController::class, 'store']);
