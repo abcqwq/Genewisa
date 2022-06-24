@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../api/api.dart';
+import '../../model/user_model.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
 
@@ -11,6 +16,32 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  String? username, firstName, lastName;
+
+  void getUser() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var data = {
+      'token' : localStorage.getString('token'),
+      'username' : localStorage.getString('username')
+    };
+
+    var res = await CallApi().getData(data, 'user/'+(data['username'] ?? ''));
+    var body = json.decode(res.body);
+    localStorage.setString('first_name', body['data']['first_name']);
+    localStorage.setString('last_name', body['data']['last_name']);
+
+    setState(() {
+      username = localStorage.getString('username');
+      firstName = localStorage.getString('first_name');
+      lastName = localStorage.getString('last_name');
+    });
+  }
+
+  @override
+  void initState() {
+    getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +71,9 @@ class _ProfileViewState extends State<ProfileView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Asep', style: GenewisaTextTheme.textTheme.headline2,),
-                      Text('Surasep', style: GenewisaTextTheme.textTheme.headline2,),
-                      Text('asepsur', style: GenewisaTextTheme.textTheme.bodyText1,),
+                      Text(firstName ?? '', style: GenewisaTextTheme.textTheme.headline2,),
+                      Text(lastName ?? '', style: GenewisaTextTheme.textTheme.headline2,),
+                      Text(username ?? '', style: GenewisaTextTheme.textTheme.bodyText1,),
                     ],
                   )
                 ],

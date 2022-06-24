@@ -136,7 +136,6 @@ class _LoginViewState extends State<LoginView> {
       localStorage.setString('token', body['data']['token']);
       localStorage.setString('username', body['data']['username']);
       _showMsg("Berhasil login", Colors.green);
-      print(body);
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomeView())

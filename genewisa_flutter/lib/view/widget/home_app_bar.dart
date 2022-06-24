@@ -112,7 +112,9 @@ class _HomeAppBarState extends State<HomeAppBar>{
     var body = json.decode(res.body);
     if(body['status']=='OK'){
       localStorage.remove('token');
-      print(body);
+      localStorage.remove('username');
+      localStorage.remove('first_name');
+      localStorage.remove('last_name');
       _showMsg("Berhasil log out", Colors.green);
       Navigator.push(
         context,
