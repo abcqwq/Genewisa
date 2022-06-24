@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/model/tempatwisata_model.dart';
 
 import '../../theme/genewisa_text_theme.dart';
 import '../widget/list_wisata_container.dart';
@@ -12,34 +13,13 @@ class GenerateResultView extends StatefulWidget {
 }
 
 class _GenerateResultViewState extends State<GenerateResultView> {
-  final List<Map<String, dynamic>> _allWisata = [
-    {
-      "id": 1,
-      "nama": "Wisata 1",
-      "url":
-          "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",
-      "lokasi": "Bandung, Jawa Barat",
-      "rating": 5
-    },
-    {
-      "id": 2,
-      "nama": "Wisata 2",
-      "url":
-          "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",
-      "lokasi": "Bandung, Jawa Barat",
-      "rating": 5
-    },
-    {
-      "id": 3,
-      "nama": "Wisata 3",
-      "url":
-          "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",
-      "lokasi": "Bogor, Jawa Barat",
-      "rating": 5
-    },
+  final List<TempatWisata> _allWisata = [
+    TempatWisata("1", "Wisata 1", "Bandung", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
+    TempatWisata("2", "Wisata 2", "Jakarta", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
+    TempatWisata("3", "Wisata 3", "Bali", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
   ];
 
-  List<Map<String, dynamic>> _foundWisata = [];
+  List<TempatWisata> _foundWisata = [];
   @override
   initState() {
     _foundWisata = _allWisata;
@@ -84,10 +64,10 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                       itemCount: _foundWisata.length,
                       itemBuilder: (context, index) => InkWell(
                         child: ListWisataContainer(
-                          nama: _foundWisata[index]["nama"].toString(),
-                          lokasi: _foundWisata[index]["lokasi"].toString(),
-                          url: _foundWisata[index]["url"].toString(),
-                          rating: _foundWisata[index]["rating"],
+                          nama: _foundWisata[index].name.toString(),
+                          lokasi: _foundWisata[index].city.toString(),
+                          url: _foundWisata[index].pictureUrl.toString(),
+                          rating: _foundWisata[index].rating,
                         ),
                         onTap: () {
                           // Navigator.pushNamed(

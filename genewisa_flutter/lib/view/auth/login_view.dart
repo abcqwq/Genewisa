@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:genewisa_flutter/view/auth/signup_view.dart';
@@ -136,6 +135,7 @@ class _LoginViewState extends State<LoginView> {
       localStorage.setString('token', body['data']['token']);
       localStorage.setString('username', body['data']['username']);
       _showMsg("Berhasil login", Colors.green);
+      print(body);
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomeView())
