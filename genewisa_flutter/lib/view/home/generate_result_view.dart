@@ -14,9 +14,9 @@ class GenerateResultView extends StatefulWidget {
 
 class _GenerateResultViewState extends State<GenerateResultView> {
   final List<TempatWisata> _allWisata = [
-    TempatWisata("1", "Wisata 1", "Bandung", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
-    TempatWisata("2", "Wisata 2", "Jakarta", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
-    TempatWisata("3", "Wisata 3", "Bali", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480", 5, "description"),
+    TempatWisata(1, "Wisata 1", "Bandung", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
+    TempatWisata(2, "Wisata 2", "Jakarta", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
+    TempatWisata(3, "Wisata 3", "Bali", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
   ];
 
   List<TempatWisata> _foundWisata = [];
@@ -67,7 +67,7 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                           nama: _foundWisata[index].name.toString(),
                           lokasi: _foundWisata[index].city.toString(),
                           url: _foundWisata[index].pictureUrl.toString(),
-                          rating: _foundWisata[index].rating,
+                          rating: _foundWisata[index].rating.toDouble(),
                         ),
                         onTap: () {
                           // Navigator.pushNamed(

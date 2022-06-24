@@ -22,7 +22,7 @@ class _ListDeskripsiWisataContainerState extends State<ListDeskripsiWisataContai
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
-      height: 200,
+      constraints: const BoxConstraints(minHeight: 200),
       decoration: GenewisaTheme.tileContainer(),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

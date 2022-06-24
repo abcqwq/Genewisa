@@ -36,22 +36,24 @@ class _ListWisataContainerState extends State<ListWisataContainer> {
               radius: 36,
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(widget.nama, style: GenewisaTextTheme.textTheme.headline2,),
-              Text(widget.lokasi, style: GenewisaTextTheme.textTheme.bodyText1,),
-              Row(
-                children: [
-                  Text("Rating : ", style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold
-                  )),
-                  Text(widget.rating.toString())
-                ],
-              )
-            ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(widget.nama, style: GenewisaTextTheme.textTheme.headline2, overflow: TextOverflow.ellipsis,),
+                Text(widget.lokasi, style: GenewisaTextTheme.textTheme.bodyText1,),
+                Row(
+                  children: [
+                    Text("Rating : ", style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text(widget.rating.toString())
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
