@@ -16,7 +16,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  String? username, firstName, lastName;
+  String? username, firstName, lastName, img;
 
   void getUser() async{
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -29,11 +29,13 @@ class _ProfileViewState extends State<ProfileView> {
     var body = json.decode(res.body);
     localStorage.setString('first_name', body['data']['first_name']);
     localStorage.setString('last_name', body['data']['last_name']);
+    localStorage.setString('img', body['data']['img']);
 
     setState(() {
       username = localStorage.getString('username');
       firstName = localStorage.getString('first_name');
       lastName = localStorage.getString('last_name');
+      img = localStorage.getString('img');
     });
   }
 
@@ -59,11 +61,11 @@ class _ProfileViewState extends State<ProfileView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 52,
                     backgroundColor: Colors.black,
-                    child: const CircleAvatar(
-                      backgroundImage: NetworkImage("https://images-ext-1.discordapp.net/external/8cWjK0gRjXAALR4npR2qYFVscpnJEkFoyWBAVQszngQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/707445135318974515/93ac9643a293a7ae11b3375beb63fc44.png?width=480&height=480"),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(img ?? ''),
                       radius: 50,
                     ),
                   ),
