@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:genewisa_flutter/model/review_model.dart';
+import 'package:genewisa_flutter/model/review_req_model.dart';
 import '../../../model/tempatwisata_model.dart';
+import '../../api/api.dart';
+import '../../model/user_model.dart';
 import '../../view/widget/detailwisata_app_bar.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -20,6 +27,57 @@ class DetailWisataView extends StatefulWidget {
 }
 
 class _DetailWisataView extends State<DetailWisataView> {
+
+  List<Review> _wisataReview = <Review>[];
+  late User _currentUser;
+  Map<int, User> reviewMap = {};
+  int _rating = 0;
+
+  void _fetchReview(int id) async {
+    final response = await CallApi().getData('review/');
+    if (response.statusCode == 200) {
+      List result = jsonDecode(response.body)['data']['data'];
+      setState(() {
+        for (Map<String, dynamic> element in result) {
+          Review review = Review.fromJson(element);
+          _wisataReview.add(review);
+        }
+        _wisataReview = _wisataReview.where((element) => element.id_tempatwisata == id).toList();
+      });
+    } else if (response.statusCode == 404){}
+    else {
+      throw Exception('Failed to load Review');
+    }
+  }
+  void _fetchUser(String username, int id) async {
+    final response = await CallApi().getData('user/' + username);
+    if (response.statusCode == 200) {
+      dynamic result = jsonDecode(response.body)['data'];
+      reviewMap[id] = User.fromJson(result);
+    } else {
+      throw Exception('Failed to load User');
+    }
+  }
+
+  void _postReview(ReviewRequest review, String path) async {
+    final response = CallApi().postData(review, path);
+    if (response.statusCode == 200) {
+      dynamic result = jsonDecode(response.body)['data'];
+      print(result);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchReview(widget.foundWisata.id);
+    for (var element in _wisataReview) {
+      _fetchUser(element.username, element.id);
+    }
+    print('checkpoint');
+    print(reviewMap);
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments = widget.foundWisata;
@@ -30,21 +88,31 @@ class _DetailWisataView extends State<DetailWisataView> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SingleChildScrollView(
-              clipBehavior: Clip.antiAlias,
-              child: ListDeskripsiWisataContainer(
-                  title: "Deskripsi",
-                  deskripsi: widget.foundWisata.description,
-              ),
+            ListDeskripsiWisataContainer(
+                title: "Deskripsi",
+                deskripsi: widget.foundWisata.description,
             ),
-            ListReviewContainer(
-                nama: "Aldo",
-                deskripsi:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit.",
-                rating: 5,
-                url:
-                    "https://images-ext-2.discordapp.net/external/ZayLKwlpb-DfZ8j9oobtSKa4Xv5rDU6-5k4NPZvMRfQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/432610292342587392/29cb28fbf65a3958105026ab03abd306.png?width=480&height=480"),
-            SizedBox(height: 50),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: _wisataReview.length,
+              itemBuilder: (context, idx) {
+                return ListReviewContainer(
+                  nama: reviewMap[_wisataReview[idx].id] != null ? reviewMap[_wisataReview[idx].id]!.firstName : 'default',
+                  deskripsi:_wisataReview[idx].comment,
+                  rating: _wisataReview[idx].rating.toDouble(),
+                  url:reviewMap[_wisataReview[idx].id] != null ? reviewMap[_wisataReview[idx].id]!.img : 'default', 
+                );
+                //const SizedBox(height: 50);
+                // return ListReviewContainer(
+                //   nama: "Aldo",
+                //   deskripsi:
+                //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum euismod leo Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit. sit amet, consectetur adipiscing elit.",
+                //   rating: 5,
+                //   url:
+                //       "https://images-ext-2.discordapp.net/external/ZayLKwlpb-DfZ8j9oobtSKa4Xv5rDU6-5k4NPZvMRfQ/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/432610292342587392/29cb28fbf65a3958105026ab03abd306.png?width=480&height=480"),
+                // SizedBox(height: 50);
+              },
+            ),
           ],
         ),
       ),
@@ -106,6 +174,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                           ),
                           onRatingUpdate: (rating) {
                             print(rating);
+                            _rating = rating as int;
                           },
                         ),
                         Container(
@@ -164,6 +233,14 @@ class _DetailWisataView extends State<DetailWisataView> {
                           decoration: GenewisaTheme.buttonContainer(),
                           child: ElevatedButton(
                             onPressed: () {
+                              _postReview(
+                                ReviewRequest(
+                                  "aa",
+                                  widget.foundWisata.id,
+                                  _rating,
+                                  textController.text,
+                                ), 'review'
+                              );
                               Navigator.pop(context);
                             },
                             style: GenewisaTheme.geneButton(),
