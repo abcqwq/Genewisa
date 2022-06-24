@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:genewisa_flutter/view/home/home_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/genewisa_text_theme.dart';
+import '../../api/api.dart';
 import '../../theme/genewisa_theme.dart';
 import '../widget/setting_text_field.dart';
 
@@ -13,6 +16,32 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsView extends State<SettingsView> {
   final _formKey = GlobalKey<FormState>();
+  String? username, firstName, lastName;
+
+  void getUser() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var data = {
+      'token' : localStorage.getString('token'),
+      'username' : localStorage.getString('username')
+    };
+
+    var res = await CallApi().getData(data, 'user/'+(data['username'] ?? ''));
+    var body = json.decode(res.body);
+    localStorage.setString('first_name', body['data']['first_name']);
+    localStorage.setString('last_name', body['data']['last_name']);
+
+    setState(() {
+      username = localStorage.getString('username');
+      firstName = localStorage.getString('first_name');
+      lastName = localStorage.getString('last_name');
+    });
+  }
+
+  @override
+  void initState() {
+    getUser();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +93,8 @@ class _SettingsView extends State<SettingsView> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      SettingTextField(hintText: "Nama lengkap", initialValue: "a"),
-                      SettingTextField(hintText: "Username", initialValue: ""),
+                      SettingTextField(hintText: "Nama lengkap", initialValue: '$firstName $lastName' ?? ''),
+                      SettingTextField(hintText: "Username", initialValue: username ?? ''),
                       SettingTextField(hintText: "Password Lama", initialValue: ""),
                       SettingTextField(hintText: "Password Baru", initialValue: ""),
                       const SizedBox(height: 20),
