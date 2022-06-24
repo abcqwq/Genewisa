@@ -121,23 +121,6 @@ class _ProfileViewState extends State<ProfileView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            '7',
-                            style: GenewisaTextTheme.textTheme.headlineLarge,
-                          ),
-                          Text(
-                            'Dikunjungi',
-                            style: GenewisaTextTheme.textTheme.bodyText1,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
                             '5',
                             style: GenewisaTextTheme.textTheme.headlineLarge,
                           ),
