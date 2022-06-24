@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
 import 'package:genewisa_flutter/view/auth/signup_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/api.dart';
@@ -20,12 +21,12 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   final _formKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  _showMsg(msg, Color clr) { //
+  _showMsg(msg, Color clr) {
+    //
     final snackBar = SnackBar(
       backgroundColor: clr,
       content: Text(msg, style: GenewisaTextTheme.textTheme.headline4),
@@ -60,14 +61,18 @@ class _LoginViewState extends State<LoginView> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Positioned(top: 0, child: AuthTextField(
-                        hintText: 'Username',
-                        textController: usernameController,
-                      )),
-                      Positioned(top: 79, child: AuthTextField(
-                        hintText: 'Password',
-                        textController: passwordController,
-                      )),
+                      Positioned(
+                          top: 0,
+                          child: AuthTextField(
+                            hintText: 'Username',
+                            textController: usernameController,
+                          )),
+                      Positioned(
+                          top: 79,
+                          child: AuthTextField(
+                            hintText: 'Password',
+                            textController: passwordController,
+                          )),
                       Positioned(
                         top: 158,
                         child: SizedBox(
@@ -79,7 +84,7 @@ class _LoginViewState extends State<LoginView> {
                               onPressed: _login,
                               style: GenewisaTheme.geneButton(),
                               child: Text(
-                                _isLoading? 'Logging-in...' : 'Login',
+                                _isLoading ? 'Logging-in...' : 'Login',
                                 style: GenewisaTextTheme.textTheme.button,
                               ),
                             ),
@@ -97,12 +102,13 @@ class _LoginViewState extends State<LoginView> {
                                 text: 'Daftar',
                                 style: GenewisaTextTheme.textTheme.bodyText2,
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap=() {
+                                  ..onTap = () {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => SignUpView())
-                                    );
-                                  }, 
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpView()));
+                                  },
                               ),
                             ],
                           ),
@@ -119,29 +125,27 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  void _login() async{
+  void _login() async {
     setState(() {
       _isLoading = true;
     });
 
     var data = {
-      'username' : usernameController.text,
-      'password' : passwordController.text
+      'username': usernameController.text,
+      'password': passwordController.text
     };
 
     var res = await CallApi().postData(data, 'user-login');
     var body = json.decode(res.body);
-    if(body['status']=='OK'){
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', body['data']['token']);
-      localStorage.setString('username', body['data']['username']);
+    if (body['status'] == 'OK') {
+      await PreferenceGlobal.getPref()
+          .setString('token', body['data']['token']);
+      await PreferenceGlobal.getPref()
+          .setString('username', body['data']['username']);
       _showMsg("Berhasil login", Colors.green);
-      print(body);
       Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeView())
-      );
-    }else{
+          context, MaterialPageRoute(builder: (context) => const HomeView()));
+    } else {
       _showMsg(body['error'][0], Colors.red);
     }
 

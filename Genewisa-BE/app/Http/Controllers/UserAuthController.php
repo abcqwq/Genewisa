@@ -28,11 +28,29 @@ class UserAuthController extends Controller
 
     public function register(Request $request)
     {
+        $image="";
+
+        $images=array(
+            "https://i.imgur.com/eVAwKPb.png",
+            "https://i.imgur.com/6loORhj.png",
+            "https://i.imgur.com/5BzoAbV.png", 
+            "https://i.imgur.com/grs05yK.png", 
+            "https://i.imgur.com/b6gPRRu.png", 
+            "https://i.imgur.com/T0lr23r.png"
+        );
+        $b = rand(1,100);
+        if ($b <= 2){
+            $image = "https://i.imgur.com/BpWouf3.png";
+        }else{
+            $image = $images[array_rand($images,1)];
+        }
+
         $values = array(
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'first_name' => $request->first_name,
-            'last_name' => $request->last_name
+            'last_name' => $request->last_name,
+            'img' => $image
         );
 
         $rules = [

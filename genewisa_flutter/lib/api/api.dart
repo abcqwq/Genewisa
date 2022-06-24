@@ -14,7 +14,7 @@ class CallApi{
     );
   }
 
-  getData(apiUrl) async {
+  getData(data, apiUrl) async {
     var fullUrl = _url + apiUrl + await _getToken();
     return await http.get(
         Uri.parse(fullUrl),

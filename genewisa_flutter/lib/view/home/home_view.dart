@@ -152,13 +152,10 @@ class _HomeViewState extends State<HomeView> {
     ProfileView(),
   ];
 
-  Future<void> _onItemTapped(int index) async {
+  void _onItemTapped(int index){
     setState(() {
       _selectedIndex = index;
     });
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    print(localStorage.get('token'));
-    print(localStorage.get('username'));
   }
 
   @override

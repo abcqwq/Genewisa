@@ -111,8 +111,7 @@ class _HomeAppBarState extends State<HomeAppBar>{
     var res = await CallApi().postData(data, 'user-logout');
     var body = json.decode(res.body);
     if(body['status']=='OK'){
-      localStorage.remove('token');
-      print(body);
+      localStorage.clear();
       _showMsg("Berhasil log out", Colors.green);
       Navigator.push(
         context,
