@@ -6,13 +6,13 @@ class ListReviewContainer extends StatefulWidget {
   final String url, nama, deskripsi;
   final double rating;
 
-  const ListReviewContainer({
-    Key? key,
-    required this.url,
-    required this.nama,
-    required this.deskripsi,
-    required this.rating
-  }) : super(key: key);
+  const ListReviewContainer(
+      {Key? key,
+      required this.url,
+      required this.nama,
+      required this.deskripsi,
+      required this.rating})
+      : super(key: key);
 
   @override
   State<ListReviewContainer> createState() => _ListReviewContainerState();
@@ -29,34 +29,42 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
       child: Column(
         children: [
           RichText(
-            text:TextSpan(
+            text: TextSpan(
               style: GenewisaTextTheme.textTheme.headline2,
               children: <TextSpan>[
-                TextSpan(text: "Review", style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(
+                    text: "Review",
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
           Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 15),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(widget.url),
-                backgroundColor: Colors.transparent,
-                radius: 25,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: 15),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
+                  backgroundColor: Colors.transparent,
+                  radius: 25,
+                ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(widget.nama, style: GenewisaTextTheme.textTheme.headline2,),
-                RichText(
-                  text:TextSpan(
-                    style: GenewisaTextTheme.textTheme.bodyText1,
-                    children: <TextSpan>[
-                      TextSpan(text: "Rating : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: widget.rating.toString()),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "anonim",
+                    style: GenewisaTextTheme.textTheme.headline2,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: GenewisaTextTheme.textTheme.bodyText1,
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "Rating : ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: widget.rating.toString()),
                       ],
                     ),
                   ),
@@ -68,15 +76,23 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
             alignment: Alignment.topLeft,
             margin: const EdgeInsets.only(top: 10),
             child: RichText(
-              text:TextSpan(
+              text: TextSpan(
                 style: GenewisaTextTheme.textTheme.bodyText1,
                 children: <TextSpan>[
-                  TextSpan(text: "Keterangan", style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text: "Keterangan",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
           ),
-          Text(widget.deskripsi, style: GenewisaTextTheme.textTheme.bodyText1,),
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              widget.deskripsi,
+              style: GenewisaTextTheme.textTheme.bodyText1,
+            ),
+          ),
         ],
       ),
     );

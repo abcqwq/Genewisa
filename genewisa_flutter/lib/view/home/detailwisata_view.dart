@@ -149,9 +149,7 @@ class _DetailWisataView extends State<DetailWisataView> {
               itemCount: _wisataReview.length,
               itemBuilder: (context, idx) {
                 return ListReviewContainer(
-                    nama: reviewMap[_wisataReview[idx].id] != null
-                        ? reviewMap[_wisataReview[idx].id]!.firstName
-                        : 'default',
+                    nama: reviewMap[_wisataReview[idx].id]?.firstName ?? '',
                     deskripsi: _wisataReview[idx].comment,
                     rating: _wisataReview[idx].rating.toDouble(),
                     url: reviewMap[_wisataReview[idx].id] != null
@@ -281,7 +279,9 @@ class _DetailWisataView extends State<DetailWisataView> {
                             onPressed: () {
                               _postReview(
                                   ReviewRequest(
-                                    "aa",
+                                    PreferenceGlobal.getPref()
+                                            .getString('username') ??
+                                        '',
                                     widget.foundWisata.id,
                                     _rating,
                                     textController.text,
