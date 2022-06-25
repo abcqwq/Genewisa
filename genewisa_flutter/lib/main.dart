@@ -35,7 +35,7 @@ class _GenewisaAppState extends State<GenewisaApp> {
   Future<bool> _checkIfLoggedIn() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.get('token');
-    print(token);
+
     _isLoggedIn = token != null;
 
     return _isLoggedIn;

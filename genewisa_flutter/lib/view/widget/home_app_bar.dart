@@ -117,8 +117,6 @@ class _HomeAppBarState extends State<HomeAppBar>{
         context,
         MaterialPageRoute(builder: (context) => LoginView())
       );
-    }else{
-      print(body);
     }
   }
 }

@@ -146,7 +146,6 @@ class _LoginViewState extends State<LoginView> {
       await PreferenceGlobal.getPref()
           .setString('username', body['data']['username']);
       _showMsg("Berhasil login", Colors.green);
-      print(body);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeView()));
     } else {

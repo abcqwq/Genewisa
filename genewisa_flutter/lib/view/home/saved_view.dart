@@ -5,6 +5,7 @@ import '../../../model/tempatwisata_model.dart';
 import '../../api/api.dart';
 import '../../utils/PreferenceGlobal.dart';
 import '../../view/home/detailwisata_view.dart';
+import '../widget/list_wisata_saved_container.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);
@@ -23,11 +24,9 @@ class _SavedViewState extends State<SavedView> {
   }
 
   void getwisata(idx) async {
-    print(idx);
     final responsenya =
         await CallApi().getData('tempat-wisata/' + (idx.toString()));
     Map<String,dynamic> result = (json.decode(responsenya.body) as Map<String,dynamic>);
-    print(result['data']['id']);
     setState(() {
       _allSavedWisata.add(TempatWisata.fromJson(result['data']));
     });
@@ -64,11 +63,10 @@ class _SavedViewState extends State<SavedView> {
                   child: ListView.builder(
                 itemCount: _allSavedWisata.length,
                 itemBuilder: (context, index) => InkWell(
-                  child: ListWisataContainer(
+                  child: ListWisataSContainer(
                     nama: _allSavedWisata[index].name.toString(),
                     lokasi: _allSavedWisata[index].city.toString(),
                     url: _allSavedWisata[index].pictureUrl.toString(),
-                    rating: _allSavedWisata[index].rating.toDouble(),
                   ),
                   onTap: () {
                     Navigator.push(

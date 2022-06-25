@@ -123,8 +123,6 @@ class _DetailWisataView extends State<DetailWisataView> {
     for (var element in _wisataReview) {
       _fetchUser(element.username, element.id);
     }
-    print('checkpoint');
-    print(reviewMap);
   }
 
   @override
