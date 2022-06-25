@@ -19,6 +19,9 @@ class ReviewController extends Controller
     public function index(Request $request)
     {
         if (!isset($request->key)) {
+            if (!isset($request->page)) {
+                return (new ResponseController)->toResponse(Review::all(), 200);
+            }
             return (new ResponseController)->toResponse(Review::paginate(10), 200);
         }
         return $this::searchByKeyword($request->key);

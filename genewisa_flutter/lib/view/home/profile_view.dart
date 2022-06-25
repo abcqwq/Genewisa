@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/api.dart';
+import '../../model/review_model.dart';
 import '../../model/user_model.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -18,6 +19,8 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   String? username, firstName, lastName, img;
+  int _numreview = 0;
+  List<Review> _userReviews = <Review>[];
   void _getUser() async {
     var data = {
       'token': PreferenceGlobal.getPref().getString('token'),
@@ -42,9 +45,30 @@ class _ProfileViewState extends State<ProfileView> {
     }
   }
 
+  void _getUserReview() async {
+    final response = await CallApi().getData('review/');
+    if (response.statusCode == 200) {
+      List result = jsonDecode(response.body)['data'];
+      setState(() {
+        for (Map<String, dynamic> element in result) {
+          Review review = Review.fromJson(element);
+          _userReviews.add(review);
+        }
+        _numreview = _userReviews
+            .where((element) => element.username == username)
+            .toList().length;
+      });
+    } else if (response.statusCode == 404) {
+    } else {
+      throw Exception('Failed to load Review');
+    }
+  }
+
   @override
   void initState() {
+    super.initState();
     _getUser();
+    _getUserReview();
   }
 
   @override
@@ -121,7 +145,7 @@ class _ProfileViewState extends State<ProfileView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            '5',
+                            _numreview.toString(),
                             style: GenewisaTextTheme.textTheme.headlineLarge,
                           ),
                           Text(

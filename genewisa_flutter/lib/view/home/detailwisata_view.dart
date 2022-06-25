@@ -67,7 +67,7 @@ class _DetailWisataView extends State<DetailWisataView> {
   void _fetchReview(int id) async {
     final response = await CallApi().getData('review/');
     if (response.statusCode == 200) {
-      List result = jsonDecode(response.body)['data']['data'];
+      List result = jsonDecode(response.body)['data'];
       setState(() {
         for (Map<String, dynamic> element in result) {
           Review review = Review.fromJson(element);
