@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../model/recommendation_model.dart';
 import '../../view/home/generate_result_view.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../../theme/genewisa_theme.dart';
@@ -13,6 +14,10 @@ class GenerateView extends StatefulWidget {
 }
 
 class _GenerateViewState extends State<GenerateView> {
+  TextEditingController budgetStartController = TextEditingController();
+  TextEditingController budgetEndController = TextEditingController();
+  TextEditingController keyController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +55,7 @@ class _GenerateViewState extends State<GenerateView> {
                       width: (MediaQuery.of(context).size.width / 2) - 60,
                       child: BudgetTextField(
                         label: 'Dari',
+                        textController: budgetStartController,
                       ),
                     ),
                   ],
@@ -78,6 +84,7 @@ class _GenerateViewState extends State<GenerateView> {
                       width: (MediaQuery.of(context).size.width / 2) - 60,
                       child: BudgetTextField(
                         label: 'Sampai',
+                        textController: budgetEndController,
                       ),
                     ),
                   ],
@@ -100,6 +107,7 @@ class _GenerateViewState extends State<GenerateView> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
+                    controller: keyController,
                     keyboardType: TextInputType.number,
                     style: GenewisaTextTheme.textTheme.bodyText1,
                     decoration: InputDecoration(
@@ -132,7 +140,15 @@ class _GenerateViewState extends State<GenerateView> {
               child: ElevatedButton(
                 style: GenewisaTheme.geneButton(),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => GenerateResultView()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => GenerateResultView(
+                                recommendation: Recommendation(
+                                    int.parse(budgetStartController.text),
+                                    int.parse(budgetEndController.text),
+                                    keyController.text),
+                              )));
                 },
                 child: Text(
                   'Generate',

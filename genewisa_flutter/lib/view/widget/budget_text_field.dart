@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../../theme/genewisa_text_theme.dart';
 
 class BudgetTextField extends StatefulWidget {
-  BudgetTextField({Key? key, required this.label}) : super(key: key);
+  BudgetTextField({Key? key, required this.label, required this.textController})
+      : super(key: key);
 
   final String label;
+  final TextEditingController textController;
 
   @override
   State<BudgetTextField> createState() => _BudgetTextFieldState();
@@ -14,6 +16,7 @@ class _BudgetTextFieldState extends State<BudgetTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.textController,
       keyboardType: TextInputType.number,
       style: GenewisaTextTheme.textTheme.bodyText1,
       decoration: InputDecoration(

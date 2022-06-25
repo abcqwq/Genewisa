@@ -36,6 +36,7 @@ Route::get('/tempat-wisata', [TempatWisataController::class, 'index'])->middlewa
 Route::get('/tempat-wisata/{id}', [TempatWisataController::class, 'view'])->middleware('auth');
 Route::put('/tempat-wisata/{id}', [TempatWisataController::class, 'update'])->middleware('auth');
 Route::delete('/tempat-wisata/{id}', [TempatWisataController::class, 'delete'])->middleware('auth');
+Route::post('/tempat-wisata-recommendation', [TempatWisataController::class, 'findByBudgetAndPlace'])->middleware('auth');
 
 // Review
 Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');

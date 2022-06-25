@@ -1,27 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/model/recommendation_model.dart';
 import 'package:genewisa_flutter/model/tempatwisata_model.dart';
 
+import '../../api/api.dart';
 import '../../theme/genewisa_text_theme.dart';
 import '../widget/list_wisata_container.dart';
+import '../widget/list_wisata_recommendation_container.dart';
 import 'detailwisata_view.dart';
 
 class GenerateResultView extends StatefulWidget {
-  GenerateResultView({Key? key}) : super(key: key);
+  GenerateResultView({Key? key, required this.recommendation})
+      : super(key: key);
+  Recommendation recommendation;
 
   @override
   State<GenerateResultView> createState() => _GenerateResultViewState();
 }
 
 class _GenerateResultViewState extends State<GenerateResultView> {
-  final List<TempatWisata> _allWisata = [
-    TempatWisata(1, "Wisata 1", "Bandung", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
-    TempatWisata(2, "Wisata 2", "Jakarta", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
-    TempatWisata(3, "Wisata 3", "Bali", "https://images-ext-1.discordapp.net/external/lu8nnjiLKKaDDkoSD7_-J3XB4S3C90kwz8Qfp3nRVyk/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/428494356375404544/81c042163f6c8407b2f65e53b9d0c491.png?width=480&height=480",10, 5, "description"),
-  ];
+  late List<TempatWisata> _allWisata = <TempatWisata>[];
+
+  void _postReview(Recommendation recommendation) async {
+    final res = await CallApi()
+        .postData(recommendation, "tempat-wisata-recommendation");
+    var body = json.decode(res.body);
+    if (body['status'] == 'OK') {
+      List result = body['data'];
+      setState(() {
+        for (Map<String, dynamic> element in result) {
+          TempatWisata tempatWisata = TempatWisata.fromJson(element);
+          _allWisata.add(tempatWisata);
+        }
+      });
+    }
+  }
 
   List<TempatWisata> _foundWisata = [];
   @override
   initState() {
+    _postReview(widget.recommendation);
     _foundWisata = _allWisata;
     super.initState();
   }
@@ -63,11 +82,11 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                   ? ListView.builder(
                       itemCount: _foundWisata.length,
                       itemBuilder: (context, index) => InkWell(
-                        child: ListWisataContainer(
+                        child: ListWisataRContainer(
                           nama: _foundWisata[index].name.toString(),
                           lokasi: _foundWisata[index].city.toString(),
                           url: _foundWisata[index].pictureUrl.toString(),
-                          rating: _foundWisata[index].rating.toDouble(),
+                          estPrice: _foundWisata[index].price,
                         ),
                         onTap: () {
                           // Navigator.pushNamed(
@@ -78,9 +97,8 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DetailWisataView(foundWisata: _foundWisata[index])
-                              )
-                          );
+                                  builder: (context) => DetailWisataView(
+                                      foundWisata: _foundWisata[index])));
                         },
                       ),
                     )

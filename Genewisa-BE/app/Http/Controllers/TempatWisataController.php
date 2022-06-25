@@ -122,7 +122,22 @@ class TempatWisataController extends Controller
         }
         
         return (new ResponseController)->toResponse(null, 404, ["Tempat wisata dengan id " . $id . " tidak dapat ditemukan..."]);
+    }
 
+    public function findByBudgetAndPlace(Request $request) {
+        $avg = ($request->budgetStart + $request->budgetEnd)/2;
+        $tempatWisata = TempatWisata::where('name', 'LIKE', '%'.$request->key.'%')->orWhere('city', 'LIKE', '%'.$request->key.'%')->get();
+        $tempatWisata = $tempatWisata->sort(function ($a, $b) use ($avg) {
+            return abs($a['price'] - $avg) < abs($b['price'] - $avg) ? -1 : 1; 
+        });
+        
+        $tempatWisata = $tempatWisata->take(5);        
+        $list=[];
+        foreach($tempatWisata as $k => $v) {
+            array_push($list, $v);
+        }
+
+        return (new ResponseController)->toResponse($list, 200);
     }
 
     private static function searchByKeyword($key) {
