@@ -24,6 +24,8 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  
+
   _showMsg(msg, Color clr) {
     //
     final snackBar = SnackBar(
@@ -65,12 +67,14 @@ class _LoginViewState extends State<LoginView> {
                           child: AuthTextField(
                             hintText: 'Username',
                             textController: usernameController,
+                            visibility: true,
                           )),
                       Positioned(
                           top: 79,
                           child: AuthTextField(
                             hintText: 'Password',
                             textController: passwordController,
+                            visibility: false,
                           )),
                       Positioned(
                         top: 158,

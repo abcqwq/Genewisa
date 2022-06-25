@@ -57,7 +57,7 @@ class _ProfileViewState extends State<ProfileView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              height: 168,
+              constraints: BoxConstraints(minHeight: 168, maxWidth: MediaQuery.of(context).size.width),
               margin: const EdgeInsets.only(
                   top: 20, bottom: 15, left: 30, right: 30),
               decoration:

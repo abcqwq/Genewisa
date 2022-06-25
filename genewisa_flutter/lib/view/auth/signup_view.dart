@@ -63,18 +63,21 @@ class _SignUpViewState extends State<SignUpView> {
                           child: AuthTextField(
                             hintText: 'Nama Lengkap',
                             textController: namaController,
+                            visibility: true,
                           )),
                       Positioned(
                           top: 79,
                           child: AuthTextField(
                             hintText: 'Username',
                             textController: usernameController,
+                            visibility: true,
                           )),
                       Positioned(
                           top: 158,
                           child: AuthTextField(
                             hintText: 'Password',
                             textController: passwordController,
+                            visibility: false,
                           )),
                       Positioned(
                         top: 237,

@@ -4,17 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SettingTextField extends StatefulWidget {
   SettingTextField(
-      {Key? key, required this.hintText, required this.textController})
+      {Key? key, required this.hintText, required this.textController, required this.visibility})
       : super(key: key);
 
   final String hintText;
   final TextEditingController textController;
+  bool visibility;
 
   @override
   State<SettingTextField> createState() => _SettingTextField();
 }
 
 class _SettingTextField extends State<SettingTextField> {
+
+  late bool _passwordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = widget.visibility;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +48,21 @@ class _SettingTextField extends State<SettingTextField> {
             borderRadius: BorderRadius.circular(20),
             borderSide: const BorderSide(color: Color(0xFF9FACE6)),
           ),
+          suffixIcon: (!widget.visibility)
+            ? IconButton(
+                icon: Icon(
+                  _passwordVisible
+                  ? Icons.visibility_outlined
+                  : Icons.visibility_off_outlined,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              )
+            : IconButton(onPressed: () {}, icon: const Icon(Icons.abc, color: Colors.white),),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -46,10 +70,7 @@ class _SettingTextField extends State<SettingTextField> {
           }
           return null;
         },
-        obscureText: widget.hintText == 'Password Lama' ||
-                widget.hintText == 'Password Baru'
-            ? true
-            : false,
+        obscureText: !_passwordVisible,
       ),
     );
   }

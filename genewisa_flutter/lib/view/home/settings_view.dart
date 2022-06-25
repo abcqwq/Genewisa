@@ -119,17 +119,25 @@ class _SettingsView extends State<SettingsView> {
                   child: Column(
                     children: [
                       SettingTextField(
-                          hintText: "Nama lengkap",
-                          textController: namaController),
+                        hintText: "Nama lengkap",
+                        textController: namaController,
+                        visibility: true,
+                      ),
                       SettingTextField(
-                          hintText: "Username",
-                          textController: usernameController),
+                        hintText: "Username",
+                        textController: usernameController,
+                        visibility: true,
+                      ),
                       SettingTextField(
-                          hintText: "Password Lama",
-                          textController: passwordlamaController),
+                        hintText: "Password Lama",
+                        textController: passwordlamaController,
+                        visibility: false,
+                      ),
                       SettingTextField(
-                          hintText: "Password Baru",
-                          textController: passwordbaruController),
+                        hintText: "Password Baru",
+                        textController: passwordbaruController,
+                        visibility: false,
+                      ),
                       const SizedBox(height: 60),
                     ],
                   ),
@@ -145,6 +153,7 @@ class _SettingsView extends State<SettingsView> {
           Container(
             width: 140,
             height: 53,
+            margin: const EdgeInsets.only(bottom: 20),
             decoration: GenewisaTheme.cancelButtonContainer(),
             child: ElevatedButton(
               onPressed: () {
@@ -160,6 +169,7 @@ class _SettingsView extends State<SettingsView> {
           Container(
             width: 140,
             height: 53,
+            margin: const EdgeInsets.only(bottom: 20),
             decoration: GenewisaTheme.buttonContainer(),
             child: ElevatedButton(
               onPressed: () {

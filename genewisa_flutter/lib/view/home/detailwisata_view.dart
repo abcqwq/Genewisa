@@ -157,6 +157,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                         : 'default');
               },
             ),
+            const SizedBox(height: 60,)
           ],
         ),
       ),
@@ -166,6 +167,7 @@ class _DetailWisataView extends State<DetailWisataView> {
           Container(
             width: 150,
             height: 53,
+            margin: const EdgeInsets.only(bottom: 20),
             decoration: GenewisaTheme.cancelButtonContainer(),
             child: ElevatedButton(
               onPressed: () => showDialog<String>(
@@ -173,11 +175,12 @@ class _DetailWisataView extends State<DetailWisataView> {
                 builder: (BuildContext context) => AlertDialog(
                   content: Container(
                     height: 300,
+                    constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
                     child: Column(
                       children: [
                         RichText(
                           text: TextSpan(
-                            style: GenewisaTextTheme.textTheme.headline1,
+                            style: GenewisaTextTheme.textTheme.headline2,
                             children: <TextSpan>[
                               TextSpan(
                                 text: arguments.name,
@@ -311,6 +314,7 @@ class _DetailWisataView extends State<DetailWisataView> {
           Container(
             width: 150,
             height: 53,
+            margin: const EdgeInsets.only(bottom: 20),
             decoration: GenewisaTheme.buttonContainer(),
             child: ElevatedButton(
               onPressed: () {
