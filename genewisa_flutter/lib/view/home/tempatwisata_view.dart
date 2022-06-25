@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genewisa_flutter/model/review_model.dart';
 import 'dart:convert';
 import '../../../model/tempatwisata_model.dart';
 import '../../api/api.dart';
@@ -16,14 +17,31 @@ class TempatWisataView extends StatefulWidget {
 class _TempatWisataViewState extends State<TempatWisataView> {
 
   late final List<TempatWisata> _allWisata = <TempatWisata>[];
+  late final List<Review> _allReview = <Review>[];
 
   void _fetchTempatWisata() async {
     final response = await CallApi().getData('tempat-wisata/');
-    if (response.statusCode == 200) {
+    final responseReview = await CallApi().getData('review/');
+    if (response.statusCode == 200 && responseReview.statusCode == 200) {
       List result = jsonDecode(response.body)['data'];
+      List resultReviews = jsonDecode(responseReview.body)['data'];
       setState(() {
+        double rating = 0;
+        var reviews = <Review>[];
+        for (Map<String, dynamic> element in resultReviews) {
+          Review review = Review.fromJson(element);
+          _allReview.add(review);
+        }
+
         for (Map<String, dynamic> element in result) {
           TempatWisata tempatWisata = TempatWisata.fromJson(element);
+          reviews = _allReview
+            .where((element) => element.id_tempatwisata == tempatWisata.id)
+            .toList();
+          if (reviews.isNotEmpty) {
+            rating = reviews.fold<double>(0, (double sum, dynamic item) => sum + item.rating).toDouble() / reviews.length.toDouble();
+            tempatWisata.rating = rating;
+          }
           _allWisata.add(tempatWisata);
         }
       });

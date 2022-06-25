@@ -62,7 +62,7 @@ class _DetailWisataView extends State<DetailWisataView> {
   List<Review> _wisataReview = <Review>[];
   late User _currentUser;
   Map<int, User> reviewMap = {};
-  int _rating = 0;
+  double _rating = 0;
 
   void _fetchReview(int id) async {
     final response = await CallApi().getData('review/');
@@ -97,7 +97,6 @@ class _DetailWisataView extends State<DetailWisataView> {
     final response = CallApi().postData(review, path);
     if (response.statusCode == 200) {
       dynamic result = jsonDecode(response.body)['data'];
-      print(result);
     }
   }
 
@@ -184,7 +183,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                             children: <TextSpan>[
                               TextSpan(
                                 text: arguments.name,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -199,7 +198,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                           child: RichText(
                             text: TextSpan(
                               style: GenewisaTextTheme.textTheme.bodyText1,
-                              children: <TextSpan>[
+                              children: const <TextSpan>[
                                 TextSpan(
                                     text: "Review",
                                     style:
@@ -214,23 +213,22 @@ class _DetailWisataView extends State<DetailWisataView> {
                           direction: Axis.horizontal,
                           allowHalfRating: false,
                           itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                          itemBuilder: (context, _) => Icon(
+                          itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
+                          itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
                           onRatingUpdate: (rating) {
-                            print(rating);
-                            _rating = rating as int;
+                            _rating = rating;
                           },
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          margin: EdgeInsets.only(top: 10, bottom: 10),
+                          margin: const EdgeInsets.only(top: 10, bottom: 10),
                           child: RichText(
                             text: TextSpan(
                               style: GenewisaTextTheme.textTheme.bodyText1,
-                              children: <TextSpan>[
+                              children: const <TextSpan>[
                                 TextSpan(
                                     text: "Deskripsi",
                                     style:

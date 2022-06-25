@@ -1,7 +1,7 @@
 class ReviewRequest {
   String username;
   int id_tempatwisata;
-  int rating;
+  double rating;
   String comment;
 
   ReviewRequest(

@@ -4,7 +4,7 @@ class TempatWisata {
   String city;
   String pictureUrl;
   int price;
-  int rating;
+  double rating;
   String description;
 
   TempatWisata (

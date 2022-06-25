@@ -2,7 +2,7 @@ class Review {
   int id;
   String username;
   int id_tempatwisata;
-  int rating;
+  double rating;
   String comment;
 
   Review(
