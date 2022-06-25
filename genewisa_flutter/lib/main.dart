@@ -47,15 +47,6 @@ class _GenewisaAppState extends State<GenewisaApp> {
       title: 'Genewisa',
       theme: GenewisaTheme.geneTheme(),
       debugShowCheckedModeBanner: false,
-      // initialRoute: '/login',
-      // routes: {
-      //   '/login': (context) => LoginView(),
-      //   '/signup':(context) => SignUpView(),
-      //   '/': (context) => HomeView(),
-      //   '/gen': (context) => GenerateView(),
-      //   //'/detailwisata': (context) => DetailWisataView(),
-      //   '/settings': (context) => SettingsView(),
-      // },
       home: _isLoggedIn ? HomeView() : LoginView(),
     );
   }

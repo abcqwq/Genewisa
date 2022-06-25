@@ -54,6 +54,7 @@ class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget 
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(
                       style: GenewisaTextTheme.textTheme.headline1,
                       children: <TextSpan>[

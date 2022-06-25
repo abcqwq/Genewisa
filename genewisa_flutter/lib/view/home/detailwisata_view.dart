@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/api/api.dart';
+import '../../api/api.dart';
 import '../../../model/tempatwisata_model.dart';
 import '../../utils/PreferenceGlobal.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:genewisa_flutter/model/review_model.dart';
-import 'package:genewisa_flutter/model/review_req_model.dart';
-import '../../api/api.dart';
+import '../../../model/review_model.dart';
+import '../../model/review_req_model.dart';
 import '../../model/user_model.dart';
 import '../../view/widget/detailwisata_app_bar.dart';
 import '../../theme/genewisa_text_theme.dart';

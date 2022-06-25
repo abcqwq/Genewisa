@@ -29,6 +29,7 @@ class _ListReviewContainerState extends State<ListReviewContainer> {
       child: Column(
         children: [
           RichText(
+            textAlign: TextAlign.center,
             text: TextSpan(
               style: GenewisaTextTheme.textTheme.headline2,
               children: <TextSpan>[
