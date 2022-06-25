@@ -52,7 +52,7 @@ class _ListWisataRContainerState extends State<ListWisataRContainer> {
                 ),
                 Row(
                   children: [
-                    Text("Est. Price : ",
+                    Text("Est. Budget : ",
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                     Text(widget.estPrice.toString())
