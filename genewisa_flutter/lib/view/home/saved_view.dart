@@ -26,7 +26,8 @@ class _SavedViewState extends State<SavedView> {
   void getwisata(idx) async {
     final responsenya =
         await CallApi().getData('tempat-wisata/' + (idx.toString()));
-    Map<String,dynamic> result = (json.decode(responsenya.body) as Map<String,dynamic>);
+    Map<String, dynamic> result =
+        (json.decode(responsenya.body) as Map<String, dynamic>);
     setState(() {
       _allSavedWisata.add(TempatWisata.fromJson(result['data']));
     });
@@ -35,7 +36,8 @@ class _SavedViewState extends State<SavedView> {
   void _fetchSavedWisata() async {
     var data = {'username': PreferenceGlobal.getPref().getString('username')};
     final response =
-        await CallApi().getData('saved/' + (data['username'] ?? ''));
+        await CallApi().getDataSaved('&&username=' + (data['username'] ?? ''));
+    print(response.body);
     if (response.statusCode == 200) {
       List result = jsonDecode(response.body)['data'];
       setState(() {

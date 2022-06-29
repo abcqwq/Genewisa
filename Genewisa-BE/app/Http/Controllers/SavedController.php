@@ -18,11 +18,11 @@ class SavedController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->username) && isset($request->id_tempatwisata)){
-            return $this::searchByUsernameandIdtempat($request->username, $request->id_tempatwisata);
-        }
         if (isset($request->username)) {
             return $this::searchByUsername($request->username);
+        }
+        if (isset($request->username) && isset($request->id_tempatwisata)){
+            return $this::searchByUsernameandIdtempat($request->username, $request->id_tempatwisata);
         }
         if (!isset($request->key)) {
             return (new ResponseController)->toResponse(Saved::all(), 200);

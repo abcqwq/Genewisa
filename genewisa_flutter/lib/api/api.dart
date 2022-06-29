@@ -17,6 +17,11 @@ class CallApi {
     return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
   }
 
+  getDataSaved(username) async {
+    var fullUrl = _url + "saved" + await _getToken() + username; 
+    return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+  }
+
   putData(data, apiUrl) async {
     var fullUrl = _url + apiUrl + await _getToken();
     return await http.put(Uri.parse(fullUrl),
