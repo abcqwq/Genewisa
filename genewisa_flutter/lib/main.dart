@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:genewisa_flutter/view/home/generate_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'view/home/detailwisata_view.dart';
-import 'view/home/settings_view.dart';
 import '../theme/genewisa_theme.dart';
-import '../view/auth/signup_view.dart';
 import '../view/auth/login_view.dart';
 import 'view/home/home_view.dart';
-import 'package:genewisa_flutter/utils/PreferenceGlobal.dart';
+import '../utils/PreferenceGlobal.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

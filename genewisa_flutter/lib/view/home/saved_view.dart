@@ -15,8 +15,7 @@ class SavedView extends StatefulWidget {
 }
 
 class _SavedViewState extends State<SavedView> {
-  late final List<TempatWisata> _allSavedWisata = <TempatWisata>[];
-  late final List<TempatWisata> _allWisata = <TempatWisata>[];
+  late List<TempatWisata> _allSavedWisata = <TempatWisata>[];
 
   initState() {
     _fetchSavedWisata();
@@ -34,6 +33,7 @@ class _SavedViewState extends State<SavedView> {
   }
 
   void _fetchSavedWisata() async {
+    _allSavedWisata = <TempatWisata>[];
     var data = {'username': PreferenceGlobal.getPref().getString('username')};
     final response =
         await CallApi().getDataSaved('&&username=' + (data['username'] ?? ''));
@@ -62,23 +62,33 @@ class _SavedViewState extends State<SavedView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
+                child: RefreshIndicator(
+                  onRefresh: () async { 
+                    setState(() {
+                      _fetchSavedWisata();
+                    });
+                  },
                   child: ListView.builder(
-                itemCount: _allSavedWisata.length,
-                itemBuilder: (context, index) => InkWell(
+                    itemCount: _allSavedWisata.length,
+                    itemBuilder: (context, index) => InkWell(
                   child: ListWisataSContainer(
                     nama: _allSavedWisata[index].name.toString(),
                     lokasi: _allSavedWisata[index].city.toString(),
                     url: _allSavedWisata[index].pictureUrl.toString(),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailWisataView(
-                                foundWisata: _allSavedWisata[index])));
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailWisataView(
+                          foundWisata: _allSavedWisata[index]
+                        )
+                      )
+                    );
                   },
-                ),
-              )),
+                  ),
+                  ),
+                )
+              ),
             ],
           ),
         ),

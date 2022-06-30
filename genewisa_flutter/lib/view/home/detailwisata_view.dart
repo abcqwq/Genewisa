@@ -63,6 +63,7 @@ class _DetailWisataView extends State<DetailWisataView> {
   double _rating = 0;
 
   void _fetchReview(int id) async {
+    _wisataReview = <Review>[];
     final response = await CallApi().getData('review/');
     if (response.statusCode == 200) {
       List result = jsonDecode(response.body)['data'];
@@ -92,10 +93,10 @@ class _DetailWisataView extends State<DetailWisataView> {
   }
 
   void _postReview(ReviewRequest review, String path) async {
-    final response = CallApi().postData(review, path);
-    if (response.statusCode == 200) {
-      dynamic result = jsonDecode(response.body)['data'];
-    }
+    CallApi().postData(review, path);
+    setState(() {
+      _fetchReview(widget.foundWisata.id);
+    });
   }
 
   void _save(id) async {

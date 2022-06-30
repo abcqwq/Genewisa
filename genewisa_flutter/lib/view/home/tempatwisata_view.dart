@@ -53,9 +53,9 @@ class _TempatWisataViewState extends State<TempatWisataView> {
   List<TempatWisata> _foundWisata = [];
   @override
   initState() {
+    super.initState();
     _fetchTempatWisata();
     _foundWisata = _allWisata;
-    super.initState();
   }
 
   void _runFilter(String enteredKeyword) {
@@ -107,7 +107,14 @@ class _TempatWisataViewState extends State<TempatWisataView> {
               height: 20,
             ),
             Expanded(
-              child: _foundWisata.isNotEmpty
+              child: RefreshIndicator(
+                onRefresh: () async { 
+                  setState(() {
+                    _fetchTempatWisata();
+                    _foundWisata = _allWisata;
+                  });
+                },
+                child: _foundWisata.isNotEmpty
                 ? ListView.builder(
                     itemCount: _foundWisata.length,
                     itemBuilder: (context, index) => InkWell(
@@ -118,11 +125,6 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                         rating: _foundWisata[index].rating.toDouble(),
                       ),
                       onTap: () {                          
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   '/detailwisata',
-                        //   arguments: _foundWisata[index],
-                        // );
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -135,7 +137,7 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                 : Text(
                     'Pencarian tidak ditemukan',
                     style: GenewisaTextTheme.textTheme.labelMedium,
-                  ),
+                  ),)
             ),
           ],
         ),
