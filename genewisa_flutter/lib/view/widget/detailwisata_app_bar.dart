@@ -4,10 +4,11 @@ import '../../theme/genewisa_text_theme.dart';
 
 class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TempatWisata foundWisata;
+  final bool showRating;
 
   const DetailWisataAppBar({
     Key? key,
-    required this.foundWisata
+    required this.foundWisata, required this.showRating
   }) : preferredSize = const Size.fromHeight(250.0), super(key: key);
 
   @override
@@ -73,10 +74,12 @@ class DetailWisataAppBar extends StatelessWidget implements PreferredSizeWidget 
                     text: TextSpan(
                       style: GenewisaTextTheme.textTheme.headline2,
                       children: <TextSpan>[
-                        const TextSpan(
+                        (showRating) 
+                        ? const TextSpan(
                             text: "Rating : ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: arguments.rating.toString()),
+                            style: TextStyle(fontWeight: FontWeight.bold))
+                        : const TextSpan(text: ""),
+                        (showRating) ? TextSpan(text: arguments.rating.toString()) : const TextSpan(text: ""),
                       ],
                     ),
                   ),

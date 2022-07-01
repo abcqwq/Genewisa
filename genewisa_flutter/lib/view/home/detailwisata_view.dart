@@ -16,8 +16,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailWisataView extends StatefulWidget {
   final TempatWisata foundWisata;
+  final bool showRating;
 
-  const DetailWisataView({Key? key, required this.foundWisata})
+  const DetailWisataView({Key? key, required this.foundWisata, required this.showRating})
       : super(key: key);
 
   @override
@@ -93,7 +94,10 @@ class _DetailWisataView extends State<DetailWisataView> {
   }
 
   void _postReview(ReviewRequest review, String path) async {
-    CallApi().postData(review, path);
+    final response = await CallApi().postData(review, path);
+    if (response.statusCode == 400) {
+      _showMsg('Kamu sudah pernah mengulas tempat ini!', Colors.red);
+    }
     setState(() {
       _fetchReview(widget.foundWisata.id);
     });
@@ -132,7 +136,7 @@ class _DetailWisataView extends State<DetailWisataView> {
     final textController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DetailWisataAppBar(foundWisata: arguments),
+      appBar: DetailWisataAppBar(foundWisata: arguments, showRating: widget.showRating,),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -197,7 +201,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                               style: GenewisaTextTheme.textTheme.bodyText1,
                               children: const <TextSpan>[
                                 TextSpan(
-                                    text: "Review",
+                                    text: "Rating",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -227,7 +231,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                               style: GenewisaTextTheme.textTheme.bodyText1,
                               children: const <TextSpan>[
                                 TextSpan(
-                                    text: "Deskripsi",
+                                    text: "Review",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -240,7 +244,7 @@ class _DetailWisataView extends State<DetailWisataView> {
                           maxLines: 4,
                           style: GenewisaTextTheme.textTheme.bodyText1,
                           decoration: InputDecoration(
-                              hintText: "Masukkan Deskripsi",
+                              hintText: "Masukkan review anda disini",
                               hintStyle: GenewisaTextTheme.textTheme.bodyText1,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),

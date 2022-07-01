@@ -98,7 +98,8 @@ class _GenerateResultViewState extends State<GenerateResultView> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailWisataView(
-                                      foundWisata: _foundWisata[index])));
+                                      foundWisata: _foundWisata[index],
+                                      showRating: false,)));
                         },
                       ),
                     )

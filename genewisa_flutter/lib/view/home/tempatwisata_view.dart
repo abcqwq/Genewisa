@@ -16,10 +16,11 @@ class TempatWisataView extends StatefulWidget {
 
 class _TempatWisataViewState extends State<TempatWisataView> {
 
-  late final List<TempatWisata> _allWisata = <TempatWisata>[];
+  late List<TempatWisata> _allWisata = <TempatWisata>[];
   late final List<Review> _allReview = <Review>[];
 
   void _fetchTempatWisata() async {
+    _allWisata = <TempatWisata>[];
     final response = await CallApi().getData('tempat-wisata/');
     final responseReview = await CallApi().getData('review/');
     if (response.statusCode == 200 && responseReview.statusCode == 200) {
@@ -40,6 +41,7 @@ class _TempatWisataViewState extends State<TempatWisataView> {
             .toList();
           if (reviews.isNotEmpty) {
             rating = reviews.fold<double>(0, (double sum, dynamic item) => sum + item.rating).toDouble() / reviews.length.toDouble();
+            rating = double.parse(rating.toStringAsFixed(2));
             tempatWisata.rating = rating;
           }
           _allWisata.add(tempatWisata);
@@ -128,7 +130,7 @@ class _TempatWisataViewState extends State<TempatWisataView> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailWisataView(foundWisata: _foundWisata[index])
+                                builder: (context) => DetailWisataView(foundWisata: _foundWisata[index], showRating: true,)
                             )
                         );
                       },

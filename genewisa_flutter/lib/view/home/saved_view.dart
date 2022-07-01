@@ -80,7 +80,8 @@ class _SavedViewState extends State<SavedView> {
                     Navigator.push(context,
                       MaterialPageRoute(
                         builder: (context) => DetailWisataView(
-                          foundWisata: _allSavedWisata[index]
+                          foundWisata: _allSavedWisata[index],
+                          showRating: false,
                         )
                       )
                     );
